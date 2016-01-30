@@ -11,14 +11,6 @@ GITHUB
 	*prevents pushing to the master
 ```git checkout -b pitchVantageKALDI```
 
-OR
-
-**this allows for changes to KALDI master to come to us...what if a change to master breaks something?
-
-1. Fork KALDI from [https://github.com/kaldi-asr/kaldi]
-
-2. Then clone this
-
 
 INSTALL
 ----------
@@ -36,3 +28,11 @@ INSTALL
 2a. ```./configure```
 2b. ```make depend -j 4```		*for multi-cores
 2c. ```make -j 4```
+
+
+
+UPDATING GITHUB PROJECT
+-------------------------
+
+- always use `pitchKaldi` branch.
+- ```git push origin pitchKaldi```
