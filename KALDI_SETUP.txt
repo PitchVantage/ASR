@@ -30,7 +30,6 @@ INSTALL
 2c. ```make -j 4```
 
 
-
 UPDATING GITHUB PROJECT
 -------------------------
 
