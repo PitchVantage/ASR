@@ -1,4 +1,0 @@
-This is a test file to see how to use Github and Atom.
-I'm adding to this file.
-New additions being made.
-Added a new line.

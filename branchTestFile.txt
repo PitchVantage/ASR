@@ -1,2 +1,0 @@
-New file for new branch.  via git and atom.
-Adding line.
