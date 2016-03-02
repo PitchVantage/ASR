@@ -7,7 +7,6 @@
 2. run `wer_per_utt_details.pl` over #1:
 
     input:
-    ```
     
     ```
     "UTT-A word-A word-A; <eps> word-A; word-B word-B; word-C <eps>; word-D word-D; word-E word-X";
