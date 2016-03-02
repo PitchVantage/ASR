@@ -47,3 +47,4 @@
     ```
 
 WER is just the (Minimum Edit Distance / length of utterance) * 100
+For example...
