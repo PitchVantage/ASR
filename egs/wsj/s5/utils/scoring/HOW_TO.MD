@@ -46,5 +46,4 @@
     substitution  word-E  word-X  1
     ```
 
-WER is just the (Minimum Edit Distance / length of utterance) * 100
-For example...
+
