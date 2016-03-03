@@ -1,10 +1,26 @@
-1. make transcript look like this in perl:
+Comparing two transcripts, using `/src/bin/computer-wer`:
 
-    ```
-    "UTT-A word-A word-A; <eps> word-A; word-B word-B; word-C <eps>; word-D word-D; word-E word-X";
-    ```
+```
+./compute-wer goldFile.txt predictFile.txt    
+```    
 
-2. run `wer_per_utt_details.pl` over #1:
+where each file has the following format:
+    
+```
+key word1 word2 ...
+```
+
+OR....
+
+If you can get the transcripts into the format below:
+    
+```
+"UTT-A word-A word-A; <eps> word-A; word-B word-B; word-C <eps>; word-D word-D; word-E word-X";
+```
+
+where `UTT-A` is a key and each pair of words (`[goldWord] [predictWord]`) is separated by `;` then `perl` scripts below can be used:
+
+1. run `/egs/wsj/s5/utils/scoring/wer_per_utt_details.pl`:
 
     input:
 
@@ -24,7 +40,7 @@
    This will show insertions (`I`), deletions (`D`), substitutions (`S`), or correct (`C`) for each word.
    `#csid` field: counts of Corr, Sub, Ins and Del
 
-3. run `wer_ops_details.pl` to see which words the system gets wrong most often:
+3. run `/egs/wsj/s5/utils/scoring/wer_ops_details.pl` to see which words the system gets wrong most often:
 
     input:
 
