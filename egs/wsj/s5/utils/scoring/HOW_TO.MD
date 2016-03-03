@@ -1,7 +1,7 @@
 Comparing two transcripts, using `/src/bin/computer-wer`:
 
 ```
-./compute-wer --text --mode=present ark:goldFile.txt ark:predictFile.txt    
+./compute-wer --text --mode=present ark:goldFile.txt ark:predictFile.txt >> results.txt   
 ```    
 
 where each file has the following format:
