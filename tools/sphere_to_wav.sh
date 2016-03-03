@@ -15,7 +15,10 @@ for i in ${ALLFILES[@]}; do
         /media/mcapizzi/data/Github/kaldi/tools/sph2pipe_v2.5/sph2pipe $i $2"${base%.WV1}.wav"       #renames from .WV1 to .wav
     #else save to same location as original
     else
-        /media/mcapizzi/data/Github/kaldi/tools/sph2pipe_v2.5/sph2pipe $i "${i%.WV1}.wav"       #renames from .WV1 to .wav
+        #get local path to /tools/sph2pipe_v2.5
+        localPath=$( cd "$(dirname "${BASH_SOURCE}")" ; pwd -P )/sph2pipe_v2.5
+        #run sph2pipe from local kaldi
+        $localPath/sph2pipe $i "${i%.WV1}.wav"       #renames from .WV1 to .wav
     fi
 done
 
