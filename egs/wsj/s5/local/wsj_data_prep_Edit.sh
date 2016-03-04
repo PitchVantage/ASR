@@ -3,6 +3,9 @@
 # Copyright 2009-2012  Microsoft Corporation  Johns Hopkins University (Author: Daniel Povey)
 # Apache 2.0.
 
+# wsj1=/Volumes/My_Passport_Mac/WSJ_Corpus/??-{?,??}.?
+#Need to connect external hard drive:
+wsj1=/Volumes/My_Passport_Mac/WSJ_Corpus/*
 
 if [ $# -le 3 ]; then
    echo "Arguments should be a list of WSJ directories, see ../run.sh for example."
@@ -41,7 +44,10 @@ cd $dir
 # line arguments being absolute pathnames.
 rm -r links/ 2>/dev/null
 mkdir links/
-ln -s $* links
+#Needs to be $wsj1
+#ln -s $* links
+ln -s $wsj1 links
+
 
 
 # Do some basic checks that we have what we expected.

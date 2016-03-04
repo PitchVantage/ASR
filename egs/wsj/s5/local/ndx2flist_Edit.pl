@@ -43,11 +43,19 @@ foreach $fn (@ARGV) {
     $disk2fn{$disk_id} = $fn;
 }
 
+# print "outside loop";
+# print "disk id = $disk_id";
+# print "1 = $1";
+# print "fn = $fn";
+# $disk2fn{"13_1_1"} = "13-1.1";
+
 while(<STDIN>){
     if(m/^;/){ next; } # Comment.  Ignore it.
     else {
       m/^([0-9_]+):\s*(\S+)$/  || die "Could not parse line $_";
       $disk=$1;
+      print "1 = $1";
+      print "disk = $disk";
       if(!defined $disk2fn{$disk}) {
           die "Disk id $disk not found";
       }
