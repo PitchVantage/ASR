@@ -19,17 +19,17 @@ INSTALL DEPENDENCIES
 
 1. go to /tools and open INSTALL
 
-1a. ```extras/check_dependencies.sh```
-1b. do what it says
-1c.  ```make -j 4```		*for multi-cores
+    - ```extras/check_dependencies.sh```
+    - do what it says
+    - ```make -j 4```		*for multi-cores
 	OR
 	```make```			*for one core
 
 2. go to /src and open INSTALL
 
-2a. ```./configure```
-2b. ```make depend -j 4```		*for multi-cores
-2c. ```make -j 4```
+    - ```./configure```
+    - ```make depend -j 4```		*for multi-cores
+    - ```make -j 4```
 
 3. go to `tools/extras/` and run `install_irstlm.sh`
 

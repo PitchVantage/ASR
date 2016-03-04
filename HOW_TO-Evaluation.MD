@@ -23,13 +23,13 @@ where `UTT-A` is a key and each pair of words (`[goldWord] [predictWord]`) is se
 
 1. run `/egs/wsj/s5/utils/scoring/wer_per_utt_details.pl`:
 
-    input:
+    - input:
 
     ```
     "UTT-A word-A word-A; <eps> word-A; word-B word-B; word-C <eps>; word-D word-D; word-E word-X";
     ```
 
-    output:
+    - output:
 
     ```
     UTT-A ref  word-A   <eps>  word-B  word-C  word-D  word-E
@@ -38,12 +38,12 @@ where `UTT-A` is a key and each pair of words (`[goldWord] [predictWord]`) is se
     UTT-A #csid 3 1 1 1
     ```
 
-   This will show insertions (`I`), deletions (`D`), substitutions (`S`), or correct (`C`) for each word.
+    - This will show insertions (`I`), deletions (`D`), substitutions (`S`), or correct (`C`) for each word.
    `#csid` field: counts of Corr, Sub, Ins and Del
 
 3. run `/egs/wsj/s5/utils/scoring/wer_ops_details.pl` to see which words the system gets wrong most often:
 
-    input:
+    - input:
 
     ```
         UTT-A ref  word-A   <eps>  word-B  word-C  word-D  word-E
@@ -52,7 +52,7 @@ where `UTT-A` is a key and each pair of words (`[goldWord] [predictWord]`) is se
         UTT-A #csid 3 1 1 1
     ```
 
-    output:
+    - output:
 
     ```
     correct       word-A  word-A  1
