@@ -4,6 +4,9 @@ $full_list = $ARGV[0];              #list of all wave files
 $test_list = $ARGV[1];              #new file name for test waves
 $train_list = $ARGV[2];             #new file name for train waves
 
+#global setting
+$trainPercentage = .80
+
 #open full_list file
 open FL, $full_list;
 $nol = 0;
@@ -26,11 +29,12 @@ while ($l = <FL>)
 {
 	chomp($l);
 	$i++;
-	if ($i <= $nol/2 )              #put first half in train
+#	if ($i <= $nol/2 )                      #put first half in train
+	if ($i <= $nol * $trainPercentage )     #put first X percent in train
 	{
 		print TRAINLIST "$l\n";
 	}
-	else                            #put second half in test
+	else                                    #put rest in test
 	{
 		print TESTLIST "$l\n";
 	}
