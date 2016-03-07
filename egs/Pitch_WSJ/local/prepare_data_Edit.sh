@@ -20,24 +20,24 @@ cd data/local
 ls -1 ../../$waves_dir > waves_all.list
 # split the complete list of wave files from waves_all.list into a train and
 # test set, and print two new text files of the filenames for test and training
-../../local/create_kgz_waves_test_train.pl waves_all.list waves.test waves.train
+../../local/create_waves_test_train.pl waves_all.list waves.test waves.train
 # sort files by bytes (kaldi-style) and re-save them with orginal filename
 for fileName in waves_all.list waves.test waves.train; do 
     LC_ALL=C sort -i $fileName -o $fileName; 
 done;
 
 # make a two-column list of test utterance ids and their paths
-../../local/create_kgz_wav_scp.pl ${waves_dir} waves.test > \
+../../local/create_wav_scp.pl ${waves_dir} waves.test > \
     ${test_dir}_wav.scp
 
 # make a two-column list of train utterance ids and their paths
-../../local/create_kgz_wav_scp.pl ${waves_dir} waves.train > \
+../../local/create_wav_scp.pl ${waves_dir} waves.train > \
     ${train_dir}_wav.scp
 
 # need to make these two files of transcriptions:
 # <utterance-id> <text>
-../../local/create_kgz_txt.pl ../../input/transcripts waves.train > ${train_dir}.txt
-../../local/create_kgz_txt.pl ../../input/transcripts waves.test > ${test_dir}.txt
+../../local/create_txt.pl ../../input/transcripts waves.train > ${train_dir}.txt
+../../local/create_txt.pl ../../input/transcripts waves.test > ${test_dir}.txt
 
 
 
