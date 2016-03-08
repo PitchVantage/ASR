@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 
-$waves_dir = $ARGV[0];
-$in_list = $ARGV[1];
+$waves_dir = $ARGV[0];      #directory of all wave files
+$in_list = $ARGV[1];        #list to be used
 
 open IL, $in_list;
 
