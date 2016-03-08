@@ -3,12 +3,12 @@ use warnings;
 use strict;
 
 # cleans transcripts before computing WER by
-# removing periods and uppercase
+    # (1) removing punctuation and uppercase
+    # (2) prepending the line with a line ID (required by ./compute-wer.cc)
 # puts new file "-cleaned.txt" in same location as original
 
 # ARGV[0] = transcript to be cleaned
 # ARGV[1] = optional: full path location for cleaned file
-
 
 #open file
 my $transcript_file = $ARGV[0];
@@ -31,12 +31,15 @@ if (scalar @ARGV == 1) {            #if no second command line argument given
 
 open(my $output, ">", $newFilePath);
 
+my $i = 0;
+
 #clean
 while (my $line = <TRANSCRIPT>) {
+    $i++;
     $line =~ s/([A-Z])/\L$1/g;      #convert all to lowercase
-    $line =~ s/\.//g;               #remove periods
+    $line =~ s/[\.\,\?]//g;               #remove periods
     $line =~ s/  / /g;              #remove extra spaces
-    print($output $line);
+    print($output "$i $line");
 }
 
 close TRANSCRIPT;
