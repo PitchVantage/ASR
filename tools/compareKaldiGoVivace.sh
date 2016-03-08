@@ -71,12 +71,12 @@ if [ $requireTranscribe == false ]; then
         echo "=======" >> ${results}
         echo "Kaldi:" >> ${results}
         #run compute-wer.c on kaldi
-        ../src/bin/compute-wer --text --mode=present ark:${gold} ark:${kaldi} >> ${results}
+        ../src/bin/compute-wer --text --mode=present ark:$gold ark:$kaldi >> $results
         #prepare results file
         echo "=======" >> ${results}
         echo "GoVivace:" >> ${results}
         #run compute-wer.c on goVivace
-        ../src/bin/compute-wer --text --mode=present ark:${gold} ark:${goV} >> ${results}
+        ../src/bin/compute-wer --text --mode=present ark:$gold ark:$goV >> $results
     done
 
 #if goVivace transcriptions haven't already been created
@@ -94,6 +94,8 @@ else
         #get basename
         base=$(basename $fileName)
         #build filenames
+        gold=$gold_dir$base.gold
+        kaldi=$kaldiTranscripts_dir$base.kaldi
         raw=$goVivaceTranscripts_dir$base.raw
         goV=$goVivaceTranscripts_dir$base.goV
         #call goVivace client
@@ -102,9 +104,20 @@ else
         #clean raw transcript
             #[same name as wav].goV
         ./prepareTranscript.pl $raw $goV
+        #delete raw file
+        rm $raw
         #prepare results file
-
-        #TODO call compute-wer
+        echo $base >> ${results}
+        echo "=======" >> ${results}
+        echo "Kaldi:" >> ${results}
+        #run compute-wer.c on kaldi
+        ../src/bin/compute-wer --text --mode=present ark:$gold ark:$kaldi >> $results
+        #prepare results file
+        echo "=======" >> ${results}
+        echo "GoVivace:" >> ${results}
+        #run compute-wer.c on goVivace
+        ../src/bin/compute-wer --text --mode=present ark:$gold ark:$goV >> $results
+    done
 fi
 
 
