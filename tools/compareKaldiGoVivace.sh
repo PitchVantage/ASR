@@ -62,10 +62,13 @@ if [ $requireTranscribe == false ]; then
     for fileName in goldTranscripts_all.list; do
         #get basename
         base=$(basename $fileName)
+        #match file without extension
+        [[ $base =~ (.*)\..* ]]
+        fileNoExt="${BASH_REMATCH[1]}"
         #build filenames
-        gold=$gold_dir$base.gold
-        kaldi=$kaldiTranscripts_dir$base.kaldi
-        goV=$goVivaceTranscripts_dir$base.goV
+        gold=$gold_dir$fileNoExt.gold
+        kaldi=$kaldiTranscripts_dir$fileNoExt.kaldi
+        goV=$goVivaceTranscripts_dir$fileNoExt.goV
         #prepare results file
         echo $base >> ${results}
         echo "=======" >> ${results}
@@ -93,11 +96,14 @@ else
     for fileName in waves_all.list; do
         #get basename
         base=$(basename $fileName)
+        #match file without extension
+        [[ $base =~ (.*)\..* ]]
+        fileNoExt="${BASH_REMATCH[1]}"
         #build filenames
         gold=$gold_dir$base.gold
-        kaldi=$kaldiTranscripts_dir$base.kaldi
-        raw=$goVivaceTranscripts_dir$base.raw
-        goV=$goVivaceTranscripts_dir$base.goV
+        kaldi=$kaldiTranscripts_dir$fileNoExt.kaldi
+        raw=$goVivaceTranscripts_dir$fileNoExt.raw
+        goV=$goVivaceTranscripts_dir$fileNoExt.goV
         #call goVivace client
             #name file .raw
         ./callGoVivace.sh text $fileName $raw

@@ -37,7 +37,7 @@ my $i = 0;
 while (my $line = <TRANSCRIPT>) {
     $i++;
     $line =~ s/([A-Z])/\L$1/g;      #convert all to lowercase
-    $line =~ s/[\.\,\?]//g;               #remove periods
+    $line =~ s/[\.\,\?\-]//g;               #remove punctuation
     $line =~ s/  / /g;              #remove extra spaces
     print($output "$i $line");
 }
