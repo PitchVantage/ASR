@@ -3,9 +3,8 @@
 $full_list = $ARGV[0];              #list of all wave files
 $test_list = $ARGV[1];              #new file name for test waves
 $train_list = $ARGV[2];             #new file name for train waves
-
-#global setting
-$trainPercentage = .80
+$trainPercentage = $ARGV[3];        #percentage (in decimal) to be used in training
+                                        #NOTE: rounds down
 
 #open full_list file
 open FL, $full_list;
