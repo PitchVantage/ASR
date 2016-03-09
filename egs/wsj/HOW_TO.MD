@@ -18,3 +18,5 @@ We have all the data for using the `s5` scripts {catalog number LDC94S13A (WSJ1)
    
     - line 86 tests to make sure the appropriate number of training items appears (since we changed it)
 
+
+**As of 3/7/16, we decided to abandon modifying the WSJ (as a waste of time, that is not generalizable) and instead building 
