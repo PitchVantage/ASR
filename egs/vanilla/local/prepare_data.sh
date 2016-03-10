@@ -1,9 +1,5 @@
 #!/bin/bash
 
-#TODO update with conditions for whether or not to run create_waves_test_train.pl
-    #if $2 == "train_dir" then you must run it
-    #else skip it
-
 # make both model/data/ and model/data/local/
 mkdir -p data/local
 
@@ -25,7 +21,6 @@ if [ $train_dir == "train_dir" ]; then
     #run create_waves_test_train.pl
     # split the complete list of wave files from waves_all.list into a train and
     # test set, and print two new text files of the filenames for test and training
-#    ../../../../tools/create_waves_test_train.pl waves_all.list waves.test waves.train $split
     ../../local/create_waves_test_train.pl waves_all.list waves.test waves.train $split
 
     # sort files by bytes (kaldi-style) and re-save them with orginal filename
@@ -34,7 +29,6 @@ if [ $train_dir == "train_dir" ]; then
     done;
 
     #TODO ==============================================
-    #TODO update script names (remove _kgz_)
     # make a two-column list of test utterance ids and their paths
     ../../local/create_wav_scp.pl ${waves_dir} waves.test > \
         ${test_dir}_wav.scp
@@ -62,17 +56,31 @@ if [ $train_dir == "train_dir" ]; then
 
 #train and test data already provided
 else
+
+    #TODO fix ==> waves_all.list is getting training and waves.train is getting testing
     #write waves.test and waves.train
-    ls -1 $train_dir > waves.train
-    ls -1 $test_dir > waves.test
+    ls -1 ../../$train_dir > waves.train
+    ls -1 ../../$test_dir > waves.test
 
     # sort files by bytes (kaldi-style) and re-save them with orginal filename
     for fileName in waves.test waves.train; do
         LC_ALL=C sort -i $fileName -o $fileName;
     done;
 
+    #TODO confirm this step
+    # make a two-column list of test utterance ids and their paths
+        #feed the test directory
+    ../../local/create_wav_scp.pl ${test_dir} waves.test > \
+        ${test_dir}_wav.scp
+
+    # make a two-column list of train utterance ids and their paths
+        #feed the train directory
+    ../../local/create_wav_scp.pl ${train_dir} waves.train > \
+        ${train_dir}_wav.scp
+
     #TODO ==============================================
     #TODO update everything from if side
+
 
 fi
 
