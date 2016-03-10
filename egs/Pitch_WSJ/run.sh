@@ -4,7 +4,7 @@
 #If you have multiple processors, it makes a que.
 #nproc tells it the number of processor. can hard code to be 1.
 #Hard code as 1 processor or 1 core in my CPU.
-numProcessors=4
+numProcessors=2
 
 # Variable being set to a string value.
 train_dir=train_dir
