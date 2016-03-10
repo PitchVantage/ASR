@@ -8,6 +8,7 @@ echo "Preparing train and test data"
 waves_dir=$1
 train_dir=$2
 test_dir=$3
+split=$4
 
 cd data/local
 
@@ -16,12 +17,14 @@ cd data/local
 ls -1 ../../$waves_dir > waves_all.list
 # split the complete list of wave files from waves_all.list into a train and
 # test set, and print two new text files of the filenames for test and training
-../../local/create_kgz_waves_test_train.pl waves_all.list waves.test waves.train
+#../../local/create_kgz_waves_test_train.pl waves_all.list waves.test waves.train
+../../../../tools/create_waves_test_train.pl waves_all.list waves.test waves.train $split
 # sort files by bytes (kaldi-style) and re-save them with orginal filename
 for fileName in waves_all.list waves.test waves.train; do 
     LC_ALL=C sort -i $fileName -o $fileName; 
 done;
 
+#TODO update script names (remove _kgz_)
 # make a two-column list of test utterance ids and their paths
 ../../local/create_kgz_wav_scp.pl ${waves_dir} waves.test > \
     ${test_dir}_wav.scp

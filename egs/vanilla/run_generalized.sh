@@ -9,13 +9,15 @@
 # -s = percentage of training split (e.g. .8)
 
 #default values for variables
-pDefault=1
+numProcessors=1
 sDefault=.8
+train_dir="train_dir"
+test_dir="test_dir"
 
 while getopts "p:n:t:a:s:" opt; do
     case $opt in
         p)
-            pDefault=$OPTARG        #update default setting
+            numProcessors=$OPTARG        #update default setting
             ;;
         n)
             train_dir=$OPTARG
@@ -55,7 +57,7 @@ rm -rf data exp mfcc
 # Make sure we have the data if -a flag used
 #waves_dir = where the audio goes
 if [ ! $waves_dir == "" ]; then
-    if [ ! -d waves_dir ]; then
+    if [ ! -d $waves_dir ]; then
         printf "\n####\n#### ERROR: audio files not found not found \n####\n\n";
         exit 1;
     fi
@@ -73,9 +75,15 @@ done;
 # create 'text', create 'utt2spk' and 'spk2utt', and copy the language model
 # from elsewhere (ARPA format)
 
-#Need to go into prepare_data and parameterize it. Currently the default is 50/50.
-#The perl scripts that this script calls determine how the data is split.
-local/prepare_data.sh waves_dir $train_dir $test_dir || \
+#TODO include if statement
+#if $train_dir == "train_dir" then no training location was given
+    #when running prepare data, do NOT run create_wave_test_train.pl
+#else
+    #run prepare data as before
+
+#added fourth parameter to include split amount for training
+# (used in create_waves_test_train.pl inside prepare data)
+local/prepare_data.sh $waves_dir $train_dir $test_dir $sDefault || \
     printf "\n####\n#### ERROR: prepare_data.sh \n####\n\n";
 
 # Copy and paste existing phonetic dictionary, language model, and phone list
