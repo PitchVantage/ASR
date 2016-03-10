@@ -75,12 +75,6 @@ done;
 # create 'text', create 'utt2spk' and 'spk2utt', and copy the language model
 # from elsewhere (ARPA format)
 
-#TODO include if statement
-#if $train_dir == "train_dir" then no training location was given
-    #when running prepare data, do NOT run create_wave_test_train.pl
-#else
-    #run prepare data as before
-
 #added fourth parameter to include split amount for training
 # (used in create_waves_test_train.pl inside prepare data)
 local/prepare_data.sh $waves_dir $train_dir $test_dir $sDefault || \

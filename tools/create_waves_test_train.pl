@@ -1,6 +1,6 @@
 #!/usr/bin/env perl
 
-#generates train/test split from a list of wave files
+#generates train/test split from a list of wave files and makes lists for each
 
 $full_list = $ARGV[0];              #list of all wave files
 $test_list = $ARGV[1];              #new file name for test waves
