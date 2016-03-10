@@ -1,14 +1,38 @@
+#!/usr/bin/env bash
+
 #!/bin/bash
 
+# -p = number of processors to use
+# -n = location of training data
+# -t = location of testing data
+# -a = location of all all data
+# -s = percentage of training split (e.g. .8)
 
-#If you have multiple processors, it makes a que.
-#nproc tells it the number of processor. can hard code to be 1.
-#Hard code as 1 processor or 1 core in my CPU.
-numProcessors=2
+#default values for variables
+pDefault=1
+sDefault=.8
 
-# Variable being set to a string value.
-train_dir=train_dir
-test_dir=test_dir
+while getopts "p:n:t:a:s:" opt; do
+    case $opt in
+        p)
+            pDefault=$OPTARG        #update default setting
+            ;;
+        n)
+            train_dir=$OPTARG
+            ;;
+        t)
+            test_dir=$OPTARG
+            ;;
+        a)
+            waves_dir=$OPTARG
+            ;;
+        \?)
+            echo "wrong parameters"
+            exit 1
+            ;;
+    esac
+done
+
 mfcc_dir=mfcc
 
 # These run.pl scripts take our commands, run them,
@@ -28,11 +52,13 @@ printf "####======================================####\n\n";
 #These are the only 3 folder that this script writes to, but it reads from other places.
 rm -rf data exp mfcc
 
-# Make sure we have the data
+# Make sure we have the data if -a flag used
 #waves_dir = where the audio goes
-if [ ! -d waves_dir ]; then
-    printf "\n####\n#### ERROR: ./waves_dir not found \n####\n\n";
-    exit 1;
+if [ ! $waves_dir == "" ]; then
+    if [ ! -d waves_dir ]; then
+        printf "\n####\n#### ERROR: audio files not found not found \n####\n\n";
+        exit 1;
+    fi
 fi
 
 # sort input files by bytes (kaldi-style) and re-save them with orginal filename (re-writes it)
