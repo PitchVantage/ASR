@@ -58,11 +58,12 @@ comm -12 ${tmpFolder}waves.list ${tmpFolder}golds.list >> ${tmpFolder}common.lis
 #if .goV transcripts don't yet exist
 if [ ! -d "$goV_dir" ]; then
 
+    #make directory for .goV
+    mkdir $goV_dir
+
     #iterate through commons.list
     while read filename
     do
-        #make directory for .goV
-        mkdir $goV_dir
 
         echo "Calling GoVivace client"
         #send to goVivace client
