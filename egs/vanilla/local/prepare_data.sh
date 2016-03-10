@@ -25,7 +25,8 @@ if [ $train_dir == "train_dir" ]; then
     #run create_waves_test_train.pl
     # split the complete list of wave files from waves_all.list into a train and
     # test set, and print two new text files of the filenames for test and training
-    ../../../../tools/create_waves_test_train.pl waves_all.list waves.test waves.train $split
+#    ../../../../tools/create_waves_test_train.pl waves_all.list waves.test waves.train $split
+    ../../local/create_waves_test_train.pl waves_all.list waves.test waves.train $split
 
     # sort files by bytes (kaldi-style) and re-save them with orginal filename
     for fileName in waves_all.list waves.test waves.train; do
