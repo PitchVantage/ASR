@@ -36,17 +36,17 @@ if [ $train_dir == "train_dir" ]; then
     #TODO ==============================================
     #TODO update script names (remove _kgz_)
     # make a two-column list of test utterance ids and their paths
-    ../../local/create_kgz_wav_scp.pl ${waves_dir} waves.test > \
+    ../../local/create_wav_scp.pl ${waves_dir} waves.test > \
         ${test_dir}_wav.scp
 
     # make a two-column list of train utterance ids and their paths
-    ../../local/create_kgz_wav_scp.pl ${waves_dir} waves.train > \
+    ../../local/create_wav_scp.pl ${waves_dir} waves.train > \
         ${train_dir}_wav.scp
 
     # need to make these two files of transcriptions:
     # <utterance-id> <text>
-    ../../local/create_kgz_txt.pl ../../input/transcripts waves.train > ${train_dir}.txt
-    ../../local/create_kgz_txt.pl ../../input/transcripts waves.test > ${test_dir}.txt
+    ../../local/create_txt.pl ../../input/transcripts waves.train > ${train_dir}.txt
+    ../../local/create_txt.pl ../../input/transcripts waves.test > ${test_dir}.txt
 
     cp ../../input/task.arpabo lm_tg.arpa
 
