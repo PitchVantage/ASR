@@ -38,7 +38,7 @@ exit 0
 # just demonstrates how to do decoding constrained by lattices.
 %WER 16.76 [ 1380 / 8234, 275 ins, 132 del, 973 sub ] exp/tri2a/decode_tgpr_dev93_fromlats/wer_16
 
-# This is an LDA+MLLT system. 
+# This is an LDA+MLLT system.
 %WER 16.43 [ 1353 / 8234, 241 ins, 162 del, 950 sub ] exp/tri2b/decode_tgpr_dev93/wer_16
 %WER 10.69 [ 603 / 5643, 154 ins, 47 del, 402 sub ] exp/tri2b/decode_tgpr_eval92/wer_14
 

@@ -75,5 +75,21 @@ def makeDataFrame(dict):
 
 #df.describe()
 
+#calculate total WER
+    #df = DataFrame
+    #errorType = "WER" or "SER"
+def calculateTotal(df, errorType):
+    if errorType == "WER":
+        all = df["total_words"].sum()
+        all_inc = df["inc_words"].sum()
+    elif errorType == "SER":
+        all = df["total_utterances"].sum()
+        all_inc = df["inc_utterances"].sum()
+    else:
+        all = df["total_words"].sum()
+        all_inc = df["inc_words"].sum()
+
+    return (all_inc / all) * 100
+
 
 

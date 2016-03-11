@@ -67,7 +67,8 @@ else
         LC_ALL=C sort -i $fileName -o $fileName;
     done;
 
-    #TODO confirm this step
+    #TODO write a new script to match create_wav_scp.pl
+        #it seems to just make a list of files without .wav on the end
     # make a two-column list of test utterance ids and their paths
         #feed the test directory
     ../../local/create_wav_scp.pl ${test_dir} waves.test > \
