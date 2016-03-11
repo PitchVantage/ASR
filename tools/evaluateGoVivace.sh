@@ -77,10 +77,11 @@ if [ ! -d "$goV_dir" ]; then
 
         echo "Writing results to file"
         #prepare results file
+        echo "============" >> $results
         echo $filename >> $results
         #send resulting .goV transcript and .gold transcript to compute-wer.cc
         ../src/bin/compute-wer --text --mode=present ark:${gold_dir}${filename}.gold ark:${goV_dir}${filename}.goV >> $results
-        echo "============" >> $results
+
     done < ${tmpFolder}common.list
 
 else
@@ -90,10 +91,11 @@ else
     do
         echo "Writing results to file"
         #prepare results file
+        echo "============" >> $results
         echo $filename >> $results
         #send resulting .goV transcript and .gold transcript to compute-wer.cc
         ../src/bin/compute-wer --text --mode=present ark:${gold_dir}${filename}.gold ark:${goV_dir}${filename}.goV >> $results
-        echo "============" >> $results
+
     done < ${tmpFolder}common.list
 
 fi

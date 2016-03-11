@@ -70,14 +70,12 @@ if [ $requireTranscribe == false ]; then
         kaldi=$kaldiTranscripts_dir$fileNoExt.kaldi
         goV=$goVivaceTranscripts_dir$fileNoExt.goV
         #prepare results file
-        echo $base >> ${results}
         echo "=======" >> ${results}
-        echo "Kaldi:" >> ${results}
+        echo $base - "Kaldi:" >> ${results}
         #run compute-wer.c on kaldi
         ../src/bin/compute-wer --text --mode=present ark:$gold ark:$kaldi >> $results
         #prepare results file
-        echo "=======" >> ${results}
-        echo "GoVivace:" >> ${results}
+        echo $base - "GoVivace:" >> ${results}
         #run compute-wer.c on goVivace
         ../src/bin/compute-wer --text --mode=present ark:$gold ark:$goV >> $results
     done
