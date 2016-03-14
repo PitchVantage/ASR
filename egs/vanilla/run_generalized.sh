@@ -2,6 +2,12 @@
 
 #!/bin/bash
 
+# if needing split...
+    #-a waves_dir
+# if providing pre-split...
+    #-n
+    #-t
+    #-s (optional)
 # -p = number of processors to use
 # -n = location of training data
 # -t = location of testing data
@@ -13,6 +19,7 @@ numProcessors=1
 sDefault=.8
 train_dir="train_dir"
 test_dir="test_dir"
+waves_dir="N/A"
 
 while getopts "p:n:t:a:s:" opt; do
     case $opt in
@@ -42,8 +49,6 @@ mfcc_dir=mfcc
 train_cmd="utils/run.pl"
 decode_cmd="utils/run.pl"
 
-
-
 printf "\n####======================================####\n";
 printf "#### BEGIN DATA + LEXICON + LANGUAGE PREP ####\n";
 printf "####======================================####\n\n";
@@ -56,7 +61,7 @@ rm -rf data exp mfcc
 
 # Make sure we have the data if -a flag used
 #waves_dir = where the audio goes
-if [ ! $waves_dir == "" ]; then
+if [ ! $waves_dir == "N/A" ]; then
     if [ ! -d $waves_dir ]; then
         printf "\n####\n#### ERROR: audio files not found not found \n####\n\n";
         exit 1;

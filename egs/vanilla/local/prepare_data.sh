@@ -12,12 +12,13 @@ split=$4
 
 cd data/local
 
-# print all the filenames from the model/waves_dir to the text file:
-# model/data/local/waves_all.list
-ls -1 ../../$waves_dir > waves_all.list
-
 #if $train_dir == "train_dir" then no training split exists yet
 if [ $train_dir == "train_dir" ]; then
+
+    # print all the filenames from the model/waves_dir to the text file:
+    # model/data/local/waves_all.list
+    ls -1 ../../$waves_dir > waves_all.list
+
     #run create_waves_test_train.pl
     # split the complete list of wave files from waves_all.list into a train and
     # test set, and print two new text files of the filenames for test and training
@@ -59,8 +60,10 @@ else
 
     #TODO fix ==> waves_all.list is getting training and waves.train is getting testing
     #write waves.test and waves.train
-    ls -1 ../../$train_dir > waves.train
-    ls -1 ../../$test_dir > waves.test
+#    ls -1 ../../$train_dir > waves.train
+    ls -1 $train_dir > waves.train
+#    ls -1 ../../$test_dir > waves.test
+    ls -1 $test_dir > waves.test
 
     # sort files by bytes (kaldi-style) and re-save them with orginal filename
     for fileName in waves.test waves.train; do
