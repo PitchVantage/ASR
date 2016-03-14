@@ -6,6 +6,12 @@
 !/src/*/Makefile
 !/src/*/README
 
+#files to ignore (that are generated from run script)
+/egs/*/data/*
+/egs/*/mfcc/*
+/egs/*/exp/*
+
+
 # Compiled Object files
 *.slo
 *.lo
