@@ -10,6 +10,7 @@
 /egs/*/data/*
 /egs/*/mfcc/*
 /egs/*/exp/*
+*.DS_Store
 
 
 # Compiled Object files
