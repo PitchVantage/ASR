@@ -9,8 +9,8 @@
     #-t
     #-s (optional)
 # -p = number of processors to use
-# -n = location of training data
-# -t = location of testing data
+# -n = location of training data    **Name something other than "train_dir"
+# -t = location of testing data     *Name something other than "test_dir"
 # -a = location of all all data
 # -s = percentage of training split (e.g. .8)
 
@@ -19,7 +19,7 @@ numProcessors=1
 sDefault=.8
 train_dir="train_dir"
 test_dir="test_dir"
-waves_dir="N/A"
+waves_dir="NA"
 
 while getopts "p:n:t:a:s:" opt; do
     case $opt in
@@ -61,7 +61,7 @@ rm -rf data exp mfcc
 
 # Make sure we have the data if -a flag used
 #waves_dir = where the audio goes
-if [ ! $waves_dir == "N/A" ]; then
+if [ ! $waves_dir == "NA" ]; then
     if [ ! -d $waves_dir ]; then
         printf "\n####\n#### ERROR: audio files not found not found \n####\n\n";
         exit 1;

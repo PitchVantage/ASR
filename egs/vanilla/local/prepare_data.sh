@@ -29,8 +29,7 @@ if [ $train_dir == "train_dir" ]; then
         LC_ALL=C sort -i $fileName -o $fileName;
     done;
 
-    #TODO ==============================================
-    # make a two-column list of test utterance ids and their paths
+       # make a two-column list of test utterance ids and their paths
     ../../local/create_wav_scp.pl ${waves_dir} waves.test > \
         ${test_dir}_wav.scp
 
@@ -58,20 +57,15 @@ if [ $train_dir == "train_dir" ]; then
 #train and test data already provided
 else
 
-    #TODO fix ==> waves_all.list is getting training and waves.train is getting testing
     #write waves.test and waves.train
-#    ls -1 ../../$train_dir > waves.train
-    ls -1 $train_dir > waves.train
-#    ls -1 ../../$test_dir > waves.test
-    ls -1 $test_dir > waves.test
+    ls -1 ../../$train_dir > waves.train
+    ls -1 ../../$test_dir > waves.test
 
     # sort files by bytes (kaldi-style) and re-save them with orginal filename
     for fileName in waves.test waves.train; do
         LC_ALL=C sort -i $fileName -o $fileName;
     done;
 
-    #TODO write a new script to match create_wav_scp.pl
-        #it seems to just make a list of files without .wav on the end
     # make a two-column list of test utterance ids and their paths
         #feed the test directory
     ../../local/create_wav_scp.pl ${test_dir} waves.test > \
@@ -82,9 +76,25 @@ else
     ../../local/create_wav_scp.pl ${train_dir} waves.train > \
         ${train_dir}_wav.scp
 
-    #TODO ==============================================
-    #TODO update everything from if side
 
+    # need to make these two files of transcriptions:
+    # <utterance-id> <text>
+    ../../local/create_txt.pl ../../input/transcripts waves.train > ${train_dir}.txt
+    ../../local/create_txt.pl ../../input/transcripts waves.test > ${test_dir}.txt
+
+    cp ../../input/task.arpabo lm_tg.arpa
+
+    cd ../..
+
+    #TODO ==============================================
+
+    for x in $train_dir $test_dir; do
+        mkdir -p data/$x
+        cp data/local/${x}_wav.scp data/$x/wav.scp
+        cp data/local/$x.txt data/$x/text
+        cat data/$x/text | awk '{printf("%s %s\n", $1, $1);}' > data/$x/utt2spk
+        utils/utt2spk_to_spk2utt.pl <data/$x/utt2spk >data/$x/spk2utt
+    done
 
 fi
 
