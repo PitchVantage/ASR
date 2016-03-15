@@ -2,17 +2,18 @@
 
 #!/bin/bash
 
+# -p = number of processors to use
+# -n = location of training data    **Name something other than "train_dir"
+# -t = location of testing data     *Name something other than "test_dir"
+# -a = location of all all data
+# -s = percentage of training split (e.g. .8)
+
 # if needing split...
     #-a waves_dir
 # if providing pre-split...
     #-n
     #-t
     #-s (optional)
-# -p = number of processors to use
-# -n = location of training data    **Name something other than "train_dir"
-# -t = location of testing data     *Name something other than "test_dir"
-# -a = location of all all data
-# -s = percentage of training split (e.g. .8)
 
 #default values for variables
 numProcessors=1
@@ -82,7 +83,7 @@ done;
 
 #added fourth parameter to include split amount for training
 # (used in create_waves_test_train.pl inside prepare data)
-local/prepare_data.sh $waves_dir $train_dir $test_dir $sDefault || \
+local/prepare_data_generalized.sh $waves_dir $train_dir $test_dir $sDefault || \
     printf "\n####\n#### ERROR: prepare_data.sh \n####\n\n";
 
 # Copy and paste existing phonetic dictionary, language model, and phone list
