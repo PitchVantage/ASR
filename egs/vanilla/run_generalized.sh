@@ -4,10 +4,10 @@
 
 # if needing split...
     #-a waves_dir
+    #-s (optional)
 # if providing pre-split...
     #-n
     #-t
-    #-s (optional)
 # -p = number of processors to use
 # -n = location of training data    **Name something other than "train_dir"
 # -t = location of testing data     *Name something other than "test_dir"
