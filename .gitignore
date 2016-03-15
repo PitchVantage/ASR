@@ -12,6 +12,10 @@
 /egs/*/exp
 *.DS_Store
 
+#too big files
+#language model
+.arpabo
+
 # Compiled Object files
 *.slo
 *.lo
