@@ -1,19 +1,18 @@
 #!/usr/bin/env bash
 
-#will run goVivace client over a folder structure and evaluate WER for each
+#will run goVivace client over a folder structure of audio and ONE transcript file and evaluate WER for each
 
 # $1 = location of results
 # $2 = location of audio
 # $3 = filetype for audio (e.g. ".wav")
-# $4 = location of gold transcripts (using prepareTranscript.pl)
-            #[same as audio].gold
+# $4 = location of gold transcript file
 # $5 = location of goVivace transcripts (using prepareTranscript.pl)
             #[same as audio].goV
 
 results=$1
 audio_dir=$2
 audio_type=$3
-gold_dir=$4
+gold_file=$4
 goV_dir=$5
 
 tmpFolder=/tmp/kaldiEvaluate/
@@ -36,6 +35,7 @@ for i in ${ALLAUDIO[@]}; do
 done
 
 echo "Checking gold transcript files"
+
 
 #get a list of all gold transcripts, sorted, and write to list file
 ALLGOLD=( $(find $4 -name *.gold -type f | sort --version-sort) )
