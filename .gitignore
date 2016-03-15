@@ -12,7 +12,6 @@
 /egs/*/exp
 *.DS_Store
 
-
 # Compiled Object files
 *.slo
 *.lo
