@@ -3,15 +3,15 @@
 #!/bin/bash
 
 # if needing split...
-    #-a waves_dir FULL path
+    #-a waves_dir
     #-s (optional)
 # if providing pre-split...
     #-n
     #-t
 # -p = number of processors to use
-# -n = FULL path to training data    **Name something other than "train_dir"
-# -t = FULL path to testing data     *Name something other than "test_dir"
-# -a = FULL path to all data
+# -n = location of training data    **Name something other than "train_dir"
+# -t = location of testing data     *Name something other than "test_dir"
+# -a = location of all all data
 # -s = percentage of training split (e.g. .8)
 
 #default values for variables
