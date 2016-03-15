@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 #!/bin/bash
 
 # make both model/data/ and model/data/local/
@@ -12,8 +14,8 @@ split=$4
 
 cd data/local
 
-#if $train_dir == "train_dir" then no training split exists yet
-if [ $train_dir == "train_dir" ]; then
+#if $waves_dir != "", then data must be split
+if [ $waves_dir != "" ]; then
 
     # print all the filenames from the model/waves_dir to the text file:
     # model/data/local/waves_all.list

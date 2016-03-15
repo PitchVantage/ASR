@@ -84,9 +84,26 @@ done;
 # from elsewhere (ARPA format)
 
 #added fourth parameter to include split amount for training
-# (used in create_waves_test_train.pl inside prepare data)
-local/prepare_data_generalized.sh $waves_dir $train_dir $test_dir $sDefault || \
+#    # (used in create_waves_test_train.pl inside prepare data)
+#local/prepare_data_generalized_all.sh $a $train_dir $test_dir $sDefault || \
+#printf "\n####\n#### ERROR: prepare_data.sh \n####\n\n";
+
+if [ -z $a ]; then
+# -n and -t flags used (data already split)
+
+    #added fourth parameter to include split amount for training
+    # (used in create_waves_test_train.pl inside prepare data)
+    local/prepare_data_generalized.sh "" $train_dir $test_dir $sDefault || \
     printf "\n####\n#### ERROR: prepare_data.sh \n####\n\n";
+
+else
+#if -a flag used (data must be split)
+
+    local/prepare_data_generalized.sh $waves_dir $train_dir $test_dir $sDefault|| \
+    printf "\n####\n#### ERROR: prepare_data.sh \n####\n\n";
+
+fi
+
 
 # Copy and paste existing phonetic dictionary, language model, and phone list
 
