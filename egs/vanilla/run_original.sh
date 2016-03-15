@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#non paramaterized version of the original run script
+
 
 #If you have multiple processors, it makes a que.
 #nproc tells it the number of processor. can hard code to be 1.
