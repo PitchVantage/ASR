@@ -9,8 +9,10 @@
 ALLFILES=( $(find $1 -name *.DOT -type f) )
 
 #make variable for path to transcripts
-filePath = ${2}transcripts
+transcriptLocation=${2}transcripts
 
 #iterate over list of files and format
 for i in ${ALLFILES[@]}; do
-    formatTranscripts.pl $i >> $filePath
+    ./formatTranscript.pl $i >> $transcriptLocation
+done
+

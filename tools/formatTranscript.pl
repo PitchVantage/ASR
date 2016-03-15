@@ -12,7 +12,7 @@ use strict;
 #open file
 my $transcript_file = $ARGV[0];
 
-open(TRANSCRIPT, $transcript_file) or die "Can't open file.  Are you sure you have the correct path?";
+open(TRANSCRIPT, $transcript_file) or die "Can't open file.  Are you sure you have the correct path for $transcript_file?";
 
 while (my $utterance = <TRANSCRIPT>) {
     $utterance =~ /(.+) \(([0-9A-z]+)\)/g;
