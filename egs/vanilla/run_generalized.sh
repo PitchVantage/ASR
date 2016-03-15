@@ -35,15 +35,18 @@ while getopts "p:n:t:a:s:" opt; do
             ;;
         n)
             # make symbolic links from locations of true data to directories expected by kaldi
-            ln -s $OPTARG train_dir
+            n=$OPTARG
+            ln -s $n train_dir
             ;;
         t)
             # make symbolic links from locations of true data to directories expected by kaldi
-            ln -s $OPTARG test_dir
+            t=$OPTARG
+            ln -s $t test_dir
             ;;
         a)
             # make symbolic links from locations of true data to directories expected by kaldi
-            ln -s $OPTARG waves_dir
+            a=$OPTARG
+            ln -s $a waves_dir
             #make sure the audio files can be found
             if [ ! -d $waves_dir ]; then
                 printf "\n####\n#### ERROR: audio files not found not found \n####\n\n";

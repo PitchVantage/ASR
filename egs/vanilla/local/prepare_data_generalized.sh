@@ -86,8 +86,6 @@ else
 
     cd ../..
 
-    #TODO ==============================================
-
     for x in $train_dir $test_dir; do
         mkdir -p data/$x
         cp data/local/${x}_wav.scp data/$x/wav.scp
