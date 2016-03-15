@@ -17,7 +17,7 @@ if [ $train_dir == "train_dir" ]; then
 
     # print all the filenames from the model/waves_dir to the text file:
     # model/data/local/waves_all.list
-    ls -1 ../../$waves_dir > waves_all.list
+    ls -1 $waves_dir > waves_all.list
 
     #run create_waves_test_train.pl
     # split the complete list of wave files from waves_all.list into a train and
@@ -58,8 +58,8 @@ if [ $train_dir == "train_dir" ]; then
 else
 
     #write waves.test and waves.train
-    ls -1 ../../$train_dir > waves.train
-    ls -1 ../../$test_dir > waves.test
+    ls -1 $train_dir > waves.train
+    ls -1 $test_dir > waves.test
 
     # sort files by bytes (kaldi-style) and re-save them with orginal filename
     for fileName in waves.test waves.train; do
