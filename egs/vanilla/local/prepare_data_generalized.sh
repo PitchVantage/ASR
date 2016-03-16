@@ -15,7 +15,7 @@ split=$4
 cd data/local
 
 #if $waves_dir != "", then data must be split
-if [ $waves_dir != "" ]; then
+if [[ $waves_dir != "" ]]; then
 
     # print all the filenames from the model/waves_dir to the text file:
     # model/data/local/waves_all.list

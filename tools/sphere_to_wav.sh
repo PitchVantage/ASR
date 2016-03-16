@@ -3,11 +3,12 @@
 # $1 = location of the entire collection
 # $2 = file extension of sphere (eg. .WV1)
 # $3 = location for output files  NOTE: if no second argument given
-
-# output is in same location as original file
+        # output is in same location as original file
 
 #capture all files in $1 recursively with type $2
 ALLFILES=( $(find $1 -name *$2 -type f) )
+
+echo "found ${#ALLFILES[@]} files"
 
 #iterate over list of files and run sph2pipe
 for i in ${ALLFILES[@]}; do

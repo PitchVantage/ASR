@@ -16,9 +16,10 @@ gold_file=$4
 goV_dir=$5
 
 tmpFolder=/tmp/kaldiEvaluate/
+gold_dir = ${tmpFolder}gold_dir/
 
 mkdir $tmpFolder
-#touch $results
+mkdir $gold_dir
 
 echo "Checking audio files"
 
@@ -69,7 +70,7 @@ if [ ! -d "$goV_dir" ]; then
         rm ${goV_dir}$filename.raw
 
         #make a file of only that utterance ID (.gold)
-        #TODO find that line only and write to file
+        grep  -F $filename $gold_file >> ${gold_dir}${filename}.gold
 
         echo "Writing results to file"
         #prepare results file
