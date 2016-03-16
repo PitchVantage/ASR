@@ -53,6 +53,9 @@ while getopts "p:n:t:a:s:" opt; do
                 exit 1;
             fi
             ;;
+        s)
+            sDefault=$OPTARG
+            ;;
         \?)
             echo "wrong parameters"
             exit 1
