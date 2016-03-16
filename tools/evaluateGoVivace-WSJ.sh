@@ -36,18 +36,11 @@ done
 
 echo "Checking gold transcript files"
 
+#write each utterance ID to golds.list
+while IFS=$' ' read -r ID; do       #pay attention only to the ID
+    echo ${ID} >> ${tmpFolder}golds.list
+done < $gold_file
 
-#get a list of all gold transcripts, sorted, and write to list file
-ALLGOLD=( $(find $4 -name *.gold -type f | sort --version-sort) )
-for j in ${ALLGOLD[@]}; do
-    #get basename
-    base=$(basename $j)
-    #match file without extension
-    [[ $base =~ (.*)\..* ]]
-    fileNoExt="${BASH_REMATCH[1]}"
-    #write to list
-    echo $fileNoExt >> ${tmpFolder}golds.list
-done
 
 echo "Building list of files to evaluate"
 
@@ -75,6 +68,9 @@ if [ ! -d "$goV_dir" ]; then
         #remove .raw file, keeping only cleaned .goV
         rm ${goV_dir}$filename.raw
 
+        #make a file of only that utterance ID (.gold)
+        #TODO find that line only and write to file
+
         echo "Writing results to file"
         #prepare results file
         echo "============" >> $results
@@ -82,9 +78,13 @@ if [ ! -d "$goV_dir" ]; then
         #send resulting .goV transcript and .gold transcript to compute-wer.cc
         ../src/bin/compute-wer --text --mode=present ark:${gold_dir}${filename}.gold ark:${goV_dir}${filename}.goV >> $results
 
+        #TODO delete .gold file
+
     done < ${tmpFolder}common.list
 
 else
+
+    #TODO update to handle one .golds file
 
     #iterate through commons.list
     while read filename
