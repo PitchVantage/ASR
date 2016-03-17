@@ -15,7 +15,7 @@
 
 #too big files
 #language model
-.arpabo
+*.arpabo
 
 # Compiled Object files
 *.slo
