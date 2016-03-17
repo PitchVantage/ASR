@@ -11,11 +11,13 @@
 /egs/*/data/local
 /egs/*/mfcc
 /egs/*/exp
-*.DS_Store
+.DS_Store
 
 #too big files
 #language model
 *.arpabo
+#graph files
+*.fst
 
 # Compiled Object files
 *.slo
