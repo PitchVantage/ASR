@@ -253,6 +253,6 @@ for x in exp/*/decode*; do
     [ -d $x ] && grep WER $x/wer_* | utils/best_wer.sh;
 done
 
-#rm -rf waves_dir
-#rm -rf test_dir
-#rm -rf train_dir
+rm -rf waves_dir
+rm -rf test_dir
+rm -rf train_dir
