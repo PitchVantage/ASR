@@ -48,7 +48,7 @@ while getopts "p:n:t:a:s:" opt; do
             a=$OPTARG
             ln -s $a waves_dir
             #make sure the audio files can be found
-            if [ ! -d $waves_dir ]; then
+            if [ ! -d waves_dir ]; then
                 printf "\n####\n#### ERROR: audio files not found not found \n####\n\n";
                 exit 1;
             fi
@@ -253,6 +253,6 @@ for x in exp/*/decode*; do
     [ -d $x ] && grep WER $x/wer_* | utils/best_wer.sh;
 done
 
-rm -rf waves_dir
-rm -rf test_dir
-rm -rf train_dir
+#rm -rf waves_dir
+#rm -rf test_dir
+#rm -rf train_dir

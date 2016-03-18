@@ -8,7 +8,6 @@
 
 #files to ignore (that are generated from run script)
 /egs/*/data
-/egs/*/data/local
 /egs/*/mfcc
 /egs/*/exp
 .DS_Store
@@ -16,6 +15,7 @@
 #too big files
 #language model
 *.arpabo
+task.arpabo
 #graph files
 *.fst
 

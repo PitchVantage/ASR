@@ -44,6 +44,7 @@ if [[ $waves_dir != "" ]]; then
     ../../local/create_txt.pl ../../input/transcripts waves.train > ${train_dir}.txt
     ../../local/create_txt.pl ../../input/transcripts waves.test > ${test_dir}.txt
 
+    #copies language model from /input/ to data/local
     cp ../../input/task.arpabo lm_tg.arpa
 
     cd ../..
