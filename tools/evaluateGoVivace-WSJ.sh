@@ -16,7 +16,7 @@ gold_file=$4
 goV_dir=$5
 
 tmpFolder=/tmp/kaldiEvaluate/
-gold_dir = ${tmpFolder}gold_dir/
+gold_dir=${tmpFolder}gold_dir/
 
 mkdir $tmpFolder
 mkdir $gold_dir
@@ -35,15 +35,18 @@ for i in ${ALLAUDIO[@]}; do
     echo $fileNoExt >> ${tmpFolder}waves.list
 done
 
-echo "Checking gold transcript files"
+echo "Checking gold transcript file"
 
 #write each utterance ID to golds.list
-while IFS=$' ' read -r ID; do       #pay attention only to the ID
-    echo ${ID} >> ${tmpFolder}golds.list
-done < $gold_file
-
+#while IFS=$' ' read -r ID; do       #pay attention only to the ID
+#    echo ${ID} >> ${tmpFolder}golds.list
+#done < $gold_file
+cut -d' ' -f1 ${gold_file} >> ${tmpFolder}golds.list
 
 echo "Building list of files to evaluate"
+
+#get just list of files in transcript
+    #take first item in each line
 
 #get list of files for which both gold transcript and wave exist
 comm -12 ${tmpFolder}waves.list ${tmpFolder}golds.list >> ${tmpFolder}common.list
@@ -86,8 +89,6 @@ if [ ! -d "$goV_dir" ]; then
 
 else
 
-    #TODO update to handle one .golds file
-
     #iterate through commons.list
     while read filename
     do
@@ -110,7 +111,7 @@ fi
 
 
 #cleaning up temp files
-rm -r $tmpFolder
+#rm -r $tmpFolder
 
 
 
