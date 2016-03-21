@@ -70,23 +70,27 @@ if [ ! -d "$goV_dir" ]; then
         ./callGoVivace.sh text ${audio_dir}${filename}.wav ${goV_dir}${filename}.raw
 
         #clean transcript for WER comparison
-        ./prepareTranscript.pl ${goV_dir}${filename}.raw ${filename} ${goV_dir}$filename.goV
+        ./prepareTranscript.pl ${goV_dir}${filename}.raw ${filename} ${goV_dir}${filename}.goV
 
         #remove .raw file, keeping only cleaned .goV
         rm ${goV_dir}$filename.raw
 
         #make a file of only that utterance ID (.gold)
-        grep  -F $filename $gold_file | uniq >> ${gold_dir}${filename}.gold          #why is grep duplicating?  uniq fixes it
+#        grep  -F $filename $gold_file | uniq >> ${gold_dir}${filename}.gold          #why is grep duplicating?  uniq fixes it
+        grep  -F $filename $gold_file | uniq >> ${gold_dir}${filename}.rawGold          #why is grep duplicating?  uniq fixes it
+
+        #clean transcript for WER comparison
+        ./prepareTranscript.pl ${gold_dir}${filename}.rawGold ${filename} ${gold_dir}${filename}.gold
 
         echo "Writing results to file"
         #prepare results file
         echo "============" >> $results
         echo $filename >> $results
         #send resulting .goV transcript and .gold transcript to compute-wer.cc
-        ../src/bin/compute-wer --text --mode=present ark:${gold_dir}${filename}.gold ark:${goV_dir}${filename}.goV >> $results
+        ../sr   c/bin/compute-wer --text --mode=present ark:${gold_dir}${filename}.gold ark:${goV_dir}${filename}.goV >> $results
 
         #delete .gold file
-#        rm ${gold_dir}${filename}.gold
+        rm ${gold_dir}${filename}.gold
 
     done < ${tmpFolder}common.list
 
@@ -96,7 +100,11 @@ else
     while read filename
     do
         #make a file of only that utterance ID (.gold)
-        grep  -F $filename $gold_file >> ${gold_dir}${filename}.gold
+#        grep  -F $filename $gold_file >> ${gold_dir}${filename}.gold
+        grep  -F $filename $gold_file | uniq >> ${gold_dir}${filename}.rawGold          #why is grep duplicating?  uniq fixes it
+
+        #clean transcript for WER comparison
+        ./prepareTranscript.pl ${gold_dir}${filename}.rawGold ${filename} ${gold_dir}${filename}.gold
 
         echo "Writing results to file"
         #prepare results file

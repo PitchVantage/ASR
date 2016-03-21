@@ -24,7 +24,7 @@ $filename =~ s/(.+)\..+/$1/;        #removes file extension
 
 my $newFilePath;
 #create new file
-if (scalar @ARGV == 1) {            #if no second command line argument given
+if (scalar @ARGV < 3) {            #if no second command line argument given
     $newFilePath = "$dirs$filename-cleaned.txt";
 } else {
     $newFilePath = $ARGV[2];        #if path given as second command line argument
@@ -38,7 +38,8 @@ my $i = 0;
 while (my $line = <TRANSCRIPT>) {
     $i++;
     $line =~ s/([A-Z])/\L$1/g;      #convert all to lowercase
-    $line =~ s/[\.\,\?\-]//g;               #remove punctuation
+#    $line =~ s/[\.\,\?\-]//g;               #remove punctuation
+    $line =~ s/\p{Punct}//g;               #remove punctuation
     $line =~ s/ {2,}/ /g;              #remove extra spaces
 #    print($output "$i $line");
     print($output "$ARGV[1] $line");
