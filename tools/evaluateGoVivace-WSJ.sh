@@ -67,13 +67,13 @@ if [ ! -d "$goV_dir" ]; then
         ./callGoVivace.sh text ${audio_dir}${filename}.wav ${goV_dir}${filename}.raw
 
         #clean transcript for WER comparison
-        ./prepareTranscript.pl ${goV_dir}$filename.raw ${goV_dir}$filename.goV
+        ./prepareTranscript.pl ${goV_dir}$filename.raw $filename ${goV_dir}$filename.goV
 
         #remove .raw file, keeping only cleaned .goV
         rm ${goV_dir}$filename.raw
 
         #make a file of only that utterance ID (.gold)
-        grep  -F $filename $gold_file >> ${gold_dir}${filename}.gold
+        grep  -F $filename $gold_file | uniq >> ${gold_dir}${filename}.gold          #why is grep duplicating?  uniq fixes it
 
         echo "Writing results to file"
         #prepare results file
@@ -111,7 +111,7 @@ fi
 
 
 #cleaning up temp files
-#rm -r $tmpFolder
+rm -r $tmpFolder
 
 
 

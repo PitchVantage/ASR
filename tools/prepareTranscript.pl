@@ -8,7 +8,8 @@ use strict;
 # puts new file "-cleaned.txt" in same location as original
 
 # ARGV[0] = transcript to be cleaned
-# ARGV[1] = optional: full path location for cleaned file
+# ARGV[1] = utterance ID
+# ARGV[2] = optional: full path location for cleaned file
 
 #open file
 my $transcript_file = $ARGV[0];
@@ -26,7 +27,7 @@ my $newFilePath;
 if (scalar @ARGV == 1) {            #if no second command line argument given
     $newFilePath = "$dirs$filename-cleaned.txt";
 } else {
-    $newFilePath = $ARGV[1];        #if path given as second command line argument
+    $newFilePath = $ARGV[2];        #if path given as second command line argument
 }
 
 open(my $output, ">", $newFilePath);
@@ -39,7 +40,8 @@ while (my $line = <TRANSCRIPT>) {
     $line =~ s/([A-Z])/\L$1/g;      #convert all to lowercase
     $line =~ s/[\.\,\?\-]//g;               #remove punctuation
     $line =~ s/ {2,}/ /g;              #remove extra spaces
-    print($output "$i $line");
+#    print($output "$i $line");
+    print($output "$ARGV[1] $line");
 }
 
 close TRANSCRIPT;
