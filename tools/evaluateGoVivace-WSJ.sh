@@ -79,7 +79,8 @@ if [ ! -d "$goV_dir" ]; then
         #send resulting .goV transcript and .gold transcript to compute-wer.cc
         ../src/bin/compute-wer --text --mode=present ark:${gold_dir}${filename}.gold ark:${goV_dir}${filename}.goV >> $results
 
-        #TODO delete .gold file
+        #delete .gold file
+        rm ${gold_dir}${filename}.gold
 
     done < ${tmpFolder}common.list
 
@@ -90,12 +91,18 @@ else
     #iterate through commons.list
     while read filename
     do
+        #make a file of only that utterance ID (.gold)
+        grep  -F $filename $gold_file >> ${gold_dir}${filename}.gold
+
         echo "Writing results to file"
         #prepare results file
         echo "============" >> $results
         echo $filename >> $results
         #send resulting .goV transcript and .gold transcript to compute-wer.cc
         ../src/bin/compute-wer --text --mode=present ark:${gold_dir}${filename}.gold ark:${goV_dir}${filename}.goV >> $results
+
+        #delete .gold file
+        rm ${gold_dir}${filename}.gold
 
     done < ${tmpFolder}common.list
 
