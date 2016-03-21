@@ -41,7 +41,10 @@ echo "Checking gold transcript file"
 #while IFS=$' ' read -r ID; do       #pay attention only to the ID
 #    echo ${ID} >> ${tmpFolder}golds.list
 #done < $gold_file
-cut -d' ' -f1 ${gold_file} >> ${tmpFolder}golds.list
+cut -d' ' -f1 ${gold_file} >> ${tmpFolder}goldsUnsorted.list
+
+#sort golds list
+sort ${tmpFolder}goldsUnsorted.list >> ${tmpFolder}golds.list
 
 echo "Building list of files to evaluate"
 
@@ -67,7 +70,7 @@ if [ ! -d "$goV_dir" ]; then
         ./callGoVivace.sh text ${audio_dir}${filename}.wav ${goV_dir}${filename}.raw
 
         #clean transcript for WER comparison
-        ./prepareTranscript.pl ${goV_dir}$filename.raw $filename ${goV_dir}$filename.goV
+        ./prepareTranscript.pl ${goV_dir}${filename}.raw ${filename} ${goV_dir}$filename.goV
 
         #remove .raw file, keeping only cleaned .goV
         rm ${goV_dir}$filename.raw
@@ -83,7 +86,7 @@ if [ ! -d "$goV_dir" ]; then
         ../src/bin/compute-wer --text --mode=present ark:${gold_dir}${filename}.gold ark:${goV_dir}${filename}.goV >> $results
 
         #delete .gold file
-        rm ${gold_dir}${filename}.gold
+#        rm ${gold_dir}${filename}.gold
 
     done < ${tmpFolder}common.list
 
@@ -103,7 +106,7 @@ else
         ../src/bin/compute-wer --text --mode=present ark:${gold_dir}${filename}.gold ark:${goV_dir}${filename}.goV >> $results
 
         #delete .gold file
-        rm ${gold_dir}${filename}.gold
+#        rm ${gold_dir}${filename}.gold
 
     done < ${tmpFolder}common.list
 
@@ -111,7 +114,7 @@ fi
 
 
 #cleaning up temp files
-rm -r $tmpFolder
+#rm -r $tmpFolder
 
 
 

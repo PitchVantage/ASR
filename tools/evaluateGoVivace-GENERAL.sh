@@ -46,8 +46,11 @@ for j in ${ALLGOLD[@]}; do
     [[ $base =~ (.*)\..* ]]
     fileNoExt="${BASH_REMATCH[1]}"
     #write to list
-    echo $fileNoExt >> ${tmpFolder}golds.list
+    echo $fileNoExt >> ${tmpFolder}goldsUnsorted.list
 done
+
+#sort golds list
+sort ${tmpFolder}goldsUnsorted.list >> ${tmpFolder}golds.list
 
 echo "Building list of files to evaluate"
 
@@ -70,7 +73,7 @@ if [ ! -d "$goV_dir" ]; then
         ./callGoVivace.sh text ${audio_dir}${filename}.wav ${goV_dir}${filename}.raw
 
         #clean transcript for WER comparison
-        ./prepareTranscript.pl ${goV_dir}$filename.raw ${goV_dir}$filename.goV
+        ./prepareTranscript.pl ${goV_dir}${filename}.raw ${filename} ${goV_dir}$filename.goV
 
         #remove .raw file, keeping only cleaned .goV
         rm ${goV_dir}$filename.raw
