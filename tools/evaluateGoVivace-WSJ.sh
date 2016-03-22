@@ -70,7 +70,8 @@ if [ ! -d "$goV_dir" ]; then
         ./callGoVivace.sh text ${audio_dir}${filename}.wav ${goV_dir}${filename}.raw
 
         #clean transcript for WER comparison
-        ./prepareTranscript.pl ${goV_dir}${filename}.raw ${filename} ${goV_dir}${filename}.goV
+#        ./prepareTranscript.pl ${goV_dir}${filename}.raw ${filename} ${goV_dir}${filename}.goV
+        ./prepareTranscript.pl ${goV_dir}${filename}.raw "" ${goV_dir}${filename}.goV
 
         #remove .raw file, keeping only cleaned .goV
         rm ${goV_dir}$filename.raw
@@ -80,7 +81,8 @@ if [ ! -d "$goV_dir" ]; then
         grep  -F $filename $gold_file | uniq >> ${gold_dir}${filename}.rawGold          #why is grep duplicating?  uniq fixes it
 
         #clean transcript for WER comparison
-        ./prepareTranscript.pl ${gold_dir}${filename}.rawGold ${filename} ${gold_dir}${filename}.gold
+#        ./prepareTranscript.pl ${gold_dir}${filename}.rawGold ${filename} ${gold_dir}${filename}.gold
+        ./prepareTranscript.pl ${gold_dir}${filename}.rawGold "" ${gold_dir}${filename}.gold
 
         echo "Writing results to file"
         #prepare results file
@@ -104,7 +106,8 @@ else
         grep  -F $filename $gold_file | uniq >> ${gold_dir}${filename}.rawGold          #why is grep duplicating?  uniq fixes it
 
         #clean transcript for WER comparison
-        ./prepareTranscript.pl ${gold_dir}${filename}.rawGold ${filename} ${gold_dir}${filename}.gold
+#        ./prepareTranscript.pl ${gold_dir}${filename}.rawGold ${filename} ${gold_dir}${filename}.gold
+        ./prepareTranscript.pl ${gold_dir}${filename}.rawGold "" ${gold_dir}${filename}.gold
 
         echo "Writing results to file"
         #prepare results file

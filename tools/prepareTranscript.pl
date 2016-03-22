@@ -8,7 +8,7 @@ use strict;
 # puts new file "-cleaned.txt" in same location as original
 
 # ARGV[0] = transcript to be cleaned
-# ARGV[1] = utterance ID
+# ARGV[1] = optional: utterance ID or ""    #if the utteranceID is part of the transcript already enter ""
 # ARGV[2] = optional: full path location for cleaned file
 
 #open file
@@ -32,17 +32,29 @@ if (scalar @ARGV < 3) {            #if no second command line argument given
 
 open(my $output, ">", $newFilePath);
 
-my $i = 0;
+#my $i = 0;
 
 #clean
 while (my $line = <TRANSCRIPT>) {
-    $i++;
-    $line =~ s/([A-Z])/\L$1/g;      #convert all to lowercase
-#    $line =~ s/[\.\,\?\-]//g;               #remove punctuation
-    $line =~ s/\p{Punct}//g;               #remove punctuation
-    $line =~ s/ {2,}/ /g;              #remove extra spaces
-#    print($output "$i $line");
-    print($output "$ARGV[1] $line");
+#    $i++;
+    if ($ARGV[1] eq "") {           #if utterance ID already present
+        my @splitLine = split(/ /, $line);       #convert to array
+        my $utteranceID = $splitLine[0];
+        my $sentenceLength = (scalar @splitLine) - 1;  #calculate length of sentence
+        my @sentenceTokens = @splitLine[1..$sentenceLength];    #take tokens of sentence (dropping existing utteranceID)
+        my $sentence = join(" ", @sentenceTokens);
+        $sentence =~ s/([A-Z])/\L$1/g;      #convert all to lowercase
+        $sentence =~ s/\p{Punct}//g;               #remove punctuation
+        $sentence =~ s/ {2,}/ /g;              #remove extra spaces
+        print($output "$utteranceID $sentence")
+    } else {
+        $line =~ s/([A-Z])/\L$1/g;      #convert all to lowercase
+#       $line =~ s/[\.\,\?\-]//g;               #remove punctuation
+        $line =~ s/\p{Punct}//g;               #remove punctuation
+        $line =~ s/ {2,}/ /g;              #remove extra spaces
+#       print($output "$i $line");
+        print($output "$ARGV[1] $line");
+    }
 }
 
 close TRANSCRIPT;
