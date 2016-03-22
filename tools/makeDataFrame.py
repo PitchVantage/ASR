@@ -27,6 +27,8 @@ def parseResults(f):
     dict["total_utterances"] = []
 
     #regexes
+    #nan
+    nanRegex = r'.*nan.*'
     #SER
         #group 1 = SER
         #group 2 = incorrect utterances
@@ -48,18 +50,31 @@ def parseResults(f):
         if line.startswith("%SER"):
             #is SER
             matched = re.match(serRegex, line.rstrip())
-            dict["SER"].append(float(matched.group(1)))
-            dict["inc_utterances"].append(float(matched.group(2)))
-            dict["total_utterances"].append(float(matched.group(3)))
+            if re.match(nanRegex, line):
+                dict["SER"].append("NaN")
+                dict["inc_utterances"].append(0.0)
+                dict["total_utterances"].append(0.0)
+            else:
+                dict["SER"].append(float(matched.group(1)))
+                dict["inc_utterances"].append(float(matched.group(2)))
+                dict["total_utterances"].append(float(matched.group(3)))
         elif line.startswith("%WER"):
             #is WER
             matched = re.match(werRegex, line.rstrip())
-            dict["WER"].append(float(matched.group(1)))
-            dict["inc_words"].append(float(matched.group(2)))
-            dict["total_words"].append(float(matched.group(3)))
-            dict["insertions"].append(float(matched.group(4)))
-            dict["deletions"].append(float(matched.group(5)))
-            dict["substitutions"].append(float(matched.group(6)))
+            if re.match(nanRegex, line):
+                dict["WER"].append("NaN")
+                dict["inc_words"].append(0.0)
+                dict["total_words"].append(0.0)
+                dict["insertions"].append(0.0)
+                dict["deletions"].append(0.0)
+                dict["substitutions"].append(0.0)
+            else:
+                dict["WER"].append(float(matched.group(1)))
+                dict["inc_words"].append(float(matched.group(2)))
+                dict["total_words"].append(float(matched.group(3)))
+                dict["insertions"].append(float(matched.group(4)))
+                dict["deletions"].append(float(matched.group(5)))
+                dict["substitutions"].append(float(matched.group(6)))
         elif not line.startswith("=") and not line.startswith("Scored"):
             #is title
             dict["title"].append(line.rstrip())
