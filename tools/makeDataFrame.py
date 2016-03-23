@@ -5,6 +5,9 @@ import pandas as pd
 
 #makes a data frame out of .results file
 
+# (1) run .parseResults(.results)
+# (2) run .makeDataFrame(output of 1)
+# (3) run .calculateTotal(output of 2, "WER")
 
 #parse .results file into dictionary (that can be converted to data frame
     #key is field
