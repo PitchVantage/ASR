@@ -50,7 +50,7 @@ for j in ${ALLGOLD[@]}; do
 done
 
 #sort golds list
-sort ${tmpFolder}goldsUnsorted.list >> ${tmpFolder}golds.list
+sort --version-sort ${tmpFolder}goldsUnsorted.list >> ${tmpFolder}golds.list
 
 echo "Building list of files to evaluate"
 
@@ -105,7 +105,7 @@ fi
 
 
 #cleaning up temp files
-rm -r $tmpFolder
+#rm -r $tmpFolder
 
 
 
