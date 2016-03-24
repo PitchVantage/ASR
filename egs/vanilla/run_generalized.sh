@@ -249,8 +249,23 @@ printf "\n####=====================####\n";
 printf "#### BEGIN CALCULATE WER ####\n";
 printf "####=====================####\n\n";
 
+#chooses the best error rate out of three runs
+#TODO figure out why three runs ???
+#TODO figure out how to find the confidence of each run and choose the most confident
+
 for x in exp/*/decode*; do
     [ -d $x ] && grep WER $x/wer_* | utils/best_wer.sh;
+done
+
+
+printf "\n####=====================####\n";
+printf "#### GENERATE PLAIN TEXT OUTPUT ####\n";
+printf "####=====================####\n\n";
+
+# generates plain text output for each of the three (always three?) .tra files
+for x in exp/triphones/decode_test_dir/scoring/*.tra; do
+    utils/int2sym.pl -f 2- exp/triphones/graph/words.txt $x
+    echo -e "\n"                                                #blank line separator
 done
 
 rm -rf waves_dir
