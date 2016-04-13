@@ -14,8 +14,8 @@
 
 #too big files
 #language model
-*.arpabo
-task.arpabo
+#*.arpabo
+#task.arpabo
 #graph files
 *.fst
 
