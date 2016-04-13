@@ -1,4 +1,4 @@
-#for some reason, transcripts file has four of everything.  This script cleans out duplicates.
+#for some reason, a generated transcript file had four of everything.  This script cleans out duplicates.
 
 f = open("/home/mcapizzi/Desktop/transcripts", "rb")
 

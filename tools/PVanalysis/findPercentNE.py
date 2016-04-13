@@ -6,6 +6,8 @@ import re
 
 #sys.argv[0] = transcript file
 
+#python findPercentNE.py path/to/file.txt
+
 #counters to hold tokens
 ne = Counter()
 non_ne = Counter()

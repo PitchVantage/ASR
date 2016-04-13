@@ -6,14 +6,25 @@ This file is an ongoing list of the supplementary tools that we are building as 
 
 Below are the subfolders for `tools/`:
 
-- `acous_pre` = scripts used for pre-processing of acoustic files to be used in the model
-- `analysis` = scripts used in the analysis of model results
-- `lm_pre` = scripts used for pre-processing files to be used in building the language model
-- `misc` = doesn't fit anywhere else
-- `trans_pre` = scripts used for pre-processing transcript files to be used in training of the model 
+- `PVacous_pre` = scripts used for pre-processing of acoustic files to be used in the model
+- `PVanalysis` = scripts used in the analysis of model results
+- `PVlm_pre` = scripts used for pre-processing files to be used in building the language model
+- `PVmisc` = doesn't fit anywhere else
+- `PVtrans_pre` = scripts used for pre-processing transcript files to be used in training of the model 
 
 *Keep descriptions short*
 
-| filename | folder location | description | parameterized | 
+| folder | filename | description | parameterized | 
 | --- | --- | --- | --- | --- |
-| *sample.py* | *misc* | *a few words to   | y |
+| *PVmisc* | *sample.py* | *a few words to describe the file* | *y* |
+| | | | | <!--- keeps a blank line between folder types -->
+| PVacous_pre | | | |
+| | | | |
+| PVanalysis | callGoVivace.sh | transcribes single audio file with `goVivace` | y |
+| PVanalysis | findPercentNE | attempts to identify (coarsely) the percent of named entities in a file | y |
+| | | | |
+| PVlm_pre | cleanCOCA.py | prepares original COCA corpus for use in language model | y |
+| | | | |
+| PVmisc | | | | 
+| | | | |
+| PVtrans_pre | cleanTranscriptDuplicates.py | removed duplicates transcripts that were generated | n |

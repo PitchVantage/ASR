@@ -17,6 +17,8 @@ Cleans COCA.master file for use in kaldi language model
 
 """
 
+#python cleanCoca.py path/to/coca.master path/to/coca.cleaned 5
+
 fIn = open(sys.argv[1], "rb")
 fOut = open(sys.argv[2], "wb")
 

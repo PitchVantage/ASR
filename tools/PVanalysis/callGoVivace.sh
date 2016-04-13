@@ -2,9 +2,11 @@
 
 #calls goVivace client (which should be in /tools
 
-# $1 = filetype ("json" or "text")
-# $2 = full audio file path
-# $3 = output location (full path)
+# $1 = filetype of output ("json" or "text")
+# $2 = full file path of single audio to transcribe
+# $3 = full path of output location
+
+#./callGoVivace.sh text path/to/sample_audio.wav path/to/transcription.txt
 
 if [ "$1" == "json" ]; then
     ./goVivaceClient -u ws://pitchvantage.govivace.com:49165/client/ws/speech --save-json-filename $3 $2
