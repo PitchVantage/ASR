@@ -102,3 +102,18 @@ incorrect_ne_rate = float(incorrect_ne_count) / float(total_count)
 print("percentage of incorrect named entities", incorrect_ne_rate)
 
 
+correct = 0
+incorrect = 0
+total = 0
+
+for word in ne.keys():
+    total += 1
+    if word in all_words:
+        correct += 1
+    else:
+        incorrect += 1
+
+incorrect_ne_rate_distinct = float(incorrect) / float(total)
+
+print("percentage of distinct incorrect named entities", incorrect_ne_rate_distinct)
+
