@@ -18,13 +18,15 @@ Below are the subfolders for `tools/`:
 | --- | --- | --- | --- | --- |
 | *PVmisc* | *sample.py* | *a few words to describe the file* | *y* |
 | | | | | <!--- keeps a blank line between folder types -->
-| PVacous_pre | | | |
-| | | | |
+| PVacous_pre | sphere_to_wav.sh | converts `.sph` to `.wav` using `sph2pipe` | y |
+| | | | | <!--- keeps a blank line between folder types -->
 | PVanalysis | callGoVivace.sh | transcribes single audio file with `goVivace` | y |
 | PVanalysis | findPercentNE | attempts to identify (coarsely) the percent of named entities in a file | y |
-| | | | |
+| | | | | <!--- keeps a blank line between folder types -->
 | PVlm_pre | cleanCOCA.py | prepares original COCA corpus for use in language model | y |
-| | | | |
-| PVmisc | | | | 
-| | | | |
+| | | | | <!--- keeps a blank line between folder types -->
+| PVmisc | geVocabSize.py | calculates the vocabulary size of a subset of transcripts | y | 
+| | | | | <!--- keeps a blank line between folder types -->
 | PVtrans_pre | cleanTranscriptDuplicates.py | removed duplicates transcripts that were generated | n |
+| PVtrans_pre | formatTranscript.pl | swaps `text UttID` to `UttID text` | y | 
+| PVtrans_pre | formatWSJTranscripts.sh | concatenates all `.DOT` files into one file | y |

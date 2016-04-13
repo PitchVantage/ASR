@@ -1,9 +1,13 @@
 #!/usr/bin/env bash
 
+# converts .sphere files to .wav using sph2pipe
+
 # $1 = location of the entire collection
 # $2 = file extension of sphere (eg. .WV1)
-# $3 = location for output files  NOTE: if no second argument given
+# $3 = location for output files  NOTE: if no third argument given
         # output is in same location as original file
+
+#./sphere_to_wav.sh path/to/collection/of/audio .WV1 [path/to/put/output.wav]
 
 #capture all files in $1 recursively with type $2
 ALLFILES=( $(find $1 -name *$2 -type f) )

@@ -1,11 +1,11 @@
 import sys
 
-#calculates unique vocabulary size of a test set
+#calculates unique vocabulary size of a file; requires a master transcript file and a list of individual utterances to anaylze
 
 #sys.argv[1] = transcripts file
 #sys.argv[2] = list of files to analyze
 
-#TODO calculate overlap with training set
+#python getVocabsize.py path/to/file.txt /path/to/list/of/files/to/test.txt
 
 #open files to test list
 fTest = open(sys.argv[2], "rb")

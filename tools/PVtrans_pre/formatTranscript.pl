@@ -9,6 +9,8 @@ use strict;
 
 # ARGV[0] transcript to be formatted
 
+#perl formatTranscript.pl path/to/transcript/to/be/formatted.txt
+
 #open file
 my $transcript_file = $ARGV[0];
 
