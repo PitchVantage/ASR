@@ -21,7 +21,9 @@ Below are the subfolders for `tools/`:
 | PVacous_pre | sphere_to_wav.sh | converts `.sph` to `.wav` using `sph2pipe` | y |
 | | | | | <!--- keeps a blank line between folder types -->
 | PVanalysis | callGoVivace.sh | transcribes single audio file with `goVivace` | y |
-| PVanalysis | findPercentNE | attempts to identify (coarsely) the percent of named entities in a file | y |
+| PVanalysis | findPercentNE.py | attempts to identify (coarsely) the percent of named entities in a file | y |
+| PVanalysis | makeDataFrame.py | makes a `pandas` dataframe out of a `.results` file | y |
+| PVanalysis | NE-rate.py | *rough* attempt to estimate ASR success on named entities | y |
 | | | | | <!--- keeps a blank line between folder types -->
 | PVlm_pre | cleanCOCA.py | prepares original COCA corpus for use in language model | y |
 | | | | | <!--- keeps a blank line between folder types -->
@@ -30,3 +32,6 @@ Below are the subfolders for `tools/`:
 | PVtrans_pre | cleanTranscriptDuplicates.py | removed duplicates transcripts that were generated | n |
 | PVtrans_pre | formatTranscript.pl | swaps `text UttID` to `UttID text` | y | 
 | PVtrans_pre | formatWSJTranscripts.sh | concatenates all `.DOT` files into one file | y |
+| PVtrans_pre | prepareTranscript.pl | cleans up raw transcript files for WER calculation | y |
+| Pvtrans_pre | prepareTranscriptFolder.sh | runs `prepareTranscript.pl` on folder of transcripts | y |
+
