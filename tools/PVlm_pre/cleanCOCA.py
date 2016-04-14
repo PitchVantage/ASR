@@ -1,14 +1,9 @@
-import sys
-import re
-from nltk.tokenize import sent_tokenize
-from nltk.tokenize import word_tokenize
-
 """
 Cleans COCA.master file for use in kaldi language model
 
-:param sys.argv[0] = location of master file
-:param ays.argv[1] = location for output file
-:param sys.argv[2] = minimum sentence length to keep
+:param sys.argv[1] = location of master file
+:param ays.argv[2] = location for output file
+:param sys.argv[3] = minimum sentence length to keep
 -removes dirty sentences (... or #)
 -removes sentences with numbers in them
 -removes sentences with less than sys.argv[3] tokens
@@ -16,6 +11,11 @@ Cleans COCA.master file for use in kaldi language model
 -puts contractions back together
 
 """
+
+import sys
+import re
+from nltk.tokenize import sent_tokenize
+from nltk.tokenize import word_tokenize
 
 #python cleanCoca.py path/to/coca.master path/to/coca.cleaned 5
 

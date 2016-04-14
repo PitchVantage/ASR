@@ -26,6 +26,7 @@ Below are the subfolders for `tools/`:
 | PVanalysis | NE-rate.py | *rough* attempt to estimate ASR success on named entities | y |
 | | | | | <!--- keeps a blank line between folder types -->
 | PVlm_pre | cleanCOCA.py | prepares original COCA corpus for use in language model | y |
+| PVlm_pre | cleanTEDLIUM.py | prepares single TEDLIUM transcript file for use in language model | y |
 | | | | | <!--- keeps a blank line between folder types -->
 | PVmisc | geVocabSize.py | calculates the vocabulary size of a subset of transcripts | y | 
 | | | | | <!--- keeps a blank line between folder types -->
