@@ -2,10 +2,12 @@
 Cleans an .stm file from a TEDLIUM transcript, writes to STDOUT
 
 :param sys.argv[1] = full path to .stm file
+:param sys.argv[2] = keep utterance ID?
 -converts all to uppercase
 -removes the metadata at front of line
 -removes non word symbols in the text
 -reconnects split contractions
+- if sys.argv[2] == true; will prepend the output with the utterance ID one time.
 """
 
 import sys
@@ -24,9 +26,14 @@ parenRegex = r'(.*)\(.*\)'
 #string to keep
 string_to_keep = ""
 
+#initiate variable to house uttID
+uttID = ""
+
 #iterate through each line
 for line in fIn:
     split_line = line.rstrip().split(" ")
+    #holds utterance ID
+    uttID = split_line[0]
     #drop first 5 items (metadata we don't need)
     keep = split_line[6:]
     #iterate through each remaining word
@@ -57,4 +64,7 @@ for line in fIn:
             else:
                 string_to_keep += " " + clean_word
 
-print(string_to_keep)
+if sys.argv[2] == "true" or sys.argv[2] == "True" or sys.argv[2] == "t" or sys.argv[2] == "T":
+    print(uttID + " " + string_to_keep)
+else:
+    print(string_to_keep)
