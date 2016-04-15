@@ -46,7 +46,12 @@ for line in fIn:
             else:
                 clean_word = word.upper()
             if i < len(keep) - 1 and keep[i+1].startswith("'"):
-                clean_word = clean_word + keep[i+1].upper()
+                next = keep[i+1].upper()
+                # clean_word = clean_word + keep[i+1].upper()
+                #if the contraction tail has (2) attached
+                clean_word = clean_word + next
+                if re.match(parenRegex, clean_word):
+                    clean_word = re.match(parenRegex, clean_word).group(1).upper()
             if string_to_keep == "":
                 string_to_keep += clean_word
             else:
