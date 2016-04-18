@@ -28,8 +28,6 @@ import sys
 #sys.ARGV[1]= Train_transcripts.txt
 #sys.ARGV[2]= CLEAN_Train_transcripts_for_LM.txt
 
-input
-
 #Reads in input .txt transcript file.
 f = open(sys.argv[1], "rb")
 
