@@ -34,6 +34,7 @@ Below are the subfolders for `tools/`:
 | PVmisc | geVocabSize.py | calculates the vocabulary size of a subset of transcripts | y | 
 | | | | | <!--- keeps a blank line between folder types -->
 | PVtrans_pre | cleanTranscriptDuplicates.py | removed duplicates transcripts that were generated | n |
+| PVtrans_pre | Create_Test_Transcript.sh | create a transcript file with only items from the test set | y |
 | PVtrans_pre | formatTranscript.pl | swaps `text UttID` to `UttID text` | y | 
 | PVtrans_pre | formatWSJTranscripts.sh | concatenates all `.DOT` files into one file | y |
 | PVtrans_pre | prepareTranscript.pl | cleans up raw transcript files for WER calculation | y |
