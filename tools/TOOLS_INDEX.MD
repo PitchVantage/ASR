@@ -28,6 +28,7 @@ Below are the subfolders for `tools/`:
 | PVlm_pre | cleanCOCA.py | prepares original COCA corpus for use in language model | y |
 | PVlm_pre | cleanAllTEDLIUM.sh | runs `cleanTEDLIUM.py` on entire folder of `.stm` files (for lm or trans) | y |
 | PVlm_pre | cleanTEDLIUM.py | prepares single TEDLIUM transcript file for use (in lm or for transcripts)| y |
+| PVlm_pre | Format_Transcript_for_LM.py | prepares a single transcript file for use in lm | y |
 | | | | | <!--- keeps a blank line between folder types -->
 | PVmisc | geVocabSize.py | calculates the vocabulary size of a subset of transcripts | y | 
 | | | | | <!--- keeps a blank line between folder types -->
