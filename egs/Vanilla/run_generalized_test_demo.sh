@@ -2,11 +2,22 @@
 
 #!/bin/bash
 
-#Test only script that works with existing egs folder. Prints out one of three possible transcriptions.
+#Script: run_generalized_test_demo.sh
+#Author: Multiple
+#Last Updated: 04_19_16
 
+#Purpose: Transcribes test .wav files and prints out the WER and one of three possible transcriptions. Works with Vanilla egs folder framework.
+
+#Command Line: ./run_generalized_test_demo.sh -p [# of processors] -t [path/to/test/wav/files] -g [path/to/graph] -m [path/to/model.mdl]
+
+#Example Command Line: ./run_generalized_test_demo.sh -p 4 -t /Volumes/poo/Easy_Demo/ -g /Volumes/poo/graph/ -m /Volumes/poo/final.mdl
+
+#Command Line Variables:
 # -p = number of processors to use
 # -n = full path of training data    **In a location *OTHER THAN* inside egs/ folder
 # -t = full path of testing data     **In a location *OTHER THAN* inside egs/ folder
+# -g = full path to graph folder     **In a location *OTHER THAN* inside egs/ folder
+# -m = full path to final.mdl file   **In a location *OTHER THAN* inside egs/ folder
 # -a = full path of all all data     **In a location *OTHER THAN* inside egs/ folder
 # -s = percentage of training split (e.g. .8)
 
@@ -30,7 +41,7 @@ sDefault=.8
 test_dir="test_dir"
 #waves_dir="waves_dir"
 
-while getopts "p:n:t:a:s:" opt; do
+while getopts "p:n:t:a:s:g:m:" opt; do
     case $opt in
         p)
             numProcessors=$OPTARG        #update default setting
@@ -54,6 +65,16 @@ while getopts "p:n:t:a:s:" opt; do
                 printf "\n####\n#### ERROR: audio files not found not found \n####\n\n";
                 exit 1;
             fi
+            ;;
+        g)
+            # make symbolic links from locations of true data to directories expected by kaldi
+            g=$OPTARG
+            ln -s $g exp/triphones/graph
+            ;;
+        m)
+            # make symbolic links from locations of true data to directories expected by kaldi
+            m=$OPTARG
+            ln -s $m exp/triphones/final.mdl
             ;;
         \?)
             echo "wrong parameters"
