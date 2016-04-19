@@ -2,10 +2,21 @@
 
 #!/bin/bash
 
+#Script: run_generalized.sh
+#Author: Multiple
+#Last Updated: 04_19_16
+
+#Purpose: Runs end-to-end train and test. Works with Vanilla egs folder framework.
+
+#Command Line: ./run_generalized.sh -p [# of processors] -n [path/to/training/.wav/files] -t [path/to/testing/.wav/files] -i [path/to/input/folder]
+
+#Example Command Line: ./run_generalized.sh -p 4 -n /Volumes/poo/Test_dir_one_folder/ -t /Volumes/poo/Easy_Demo/ -i Best_Results_WSJ/input/
+
 # -p = number of processors to use
 # -n = full path of training data    **In a location *OTHER THAN* inside egs/ folder
 # -t = full path of testing data     **In a location *OTHER THAN* inside egs/ folder
 # -a = full path of all all data     **In a location *OTHER THAN* inside egs/ folder
+# -i = full path to input folder
 # -s = percentage of training split (e.g. .8)
 
 # if needing split...
@@ -20,7 +31,7 @@
 # so that we have a clean slate
 #exp = monophones, lined monophones, and triphones
 #along with any existing waves_dir, train_dir, and test_dir
-rm -rf data exp mfcc waves_dir train_dir test_dir
+rm -rf input data exp mfcc waves_dir train_dir test_dir
 
 #default values for variables
 numProcessors=1
@@ -29,7 +40,7 @@ train_dir="train_dir"
 test_dir="test_dir"
 waves_dir="waves_dir"
 
-while getopts "p:n:t:a:s:" opt; do
+while getopts "p:n:t:a:s:i:" opt; do
     case $opt in
         p)
             numProcessors=$OPTARG        #update default setting
@@ -53,6 +64,11 @@ while getopts "p:n:t:a:s:" opt; do
                 printf "\n####\n#### ERROR: audio files not found not found \n####\n\n";
                 exit 1;
             fi
+            ;;
+        i)
+            # make symbolic links from locations of true data to directories expected by kaldi
+            i=$OPTARG
+            ln -s $i input
             ;;
         \?)
             echo "wrong parameters"
@@ -294,6 +310,7 @@ done
 rm -rf waves_dir
 rm -rf test_dir
 rm -rf train_dir
+rm -rf input
 
 printf "\n####=========####\n";
 printf "#### Finished ####\n";
