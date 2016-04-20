@@ -32,6 +32,7 @@ Below are the subfolders for `tools/`:
 | PVlm_pre | cleanAllTEDLIUM.sh | runs `cleanTEDLIUM.py` on entire folder of `.stm` files (for lm or trans) | y |
 | PVlm_pre | cleanTEDLIUM.py | prepares single TEDLIUM transcript file for use (in lm or for transcripts)| y |
 | PVlm_pre | Create_lm.sh | creates a trigram lm from a cleaned lm transcript| y |
+| PVlm_pre | Create_lm_start_end.sh | creates a trigram lm from a cleaned lm transcript with start and end markers| y |
 | PVlm_pre | Format_Transcript_for_LM.py | prepares a single transcript file for use in lm | y |
 | PVlm_pre | Replace_w_XYZ.py | replaces words not in the lexicon with XYZ for a single lm transcript file | y |
 | | | | | <!--- keeps a blank line between folder types -->
