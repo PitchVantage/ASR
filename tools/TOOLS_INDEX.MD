@@ -8,6 +8,7 @@ Below are the subfolders for `tools/`:
 
 - `PVacous_pre` = scripts used for pre-processing of acoustic files to be used in the model
 - `PVanalysis` = scripts used in the analysis of model results
+- `PVlexicon_pre` = scripts used for pre-processing files to be used in building the lexicon
 - `PVlm_pre` = scripts used for pre-processing files to be used in building the language model
 - `PVmisc` = doesn't fit anywhere else
 - `PVtrans_pre` = scripts used for pre-processing transcript files to be used in training of the model 
@@ -24,6 +25,8 @@ Below are the subfolders for `tools/`:
 | PVanalysis | findPercentNE.py | attempts to identify (coarsely) the percent of named entities in a file | y |
 | PVanalysis | makeDataFrame.py | makes a `pandas` dataframe out of a `.results` file | y |
 | PVanalysis | NE-rate.py | *rough* attempt to estimate ASR success on named entities | y |
+| | | | | <!--- keeps a blank line between folder types -->
+| PVlexicon_pre | UpperCase_Dict.py | changes a lexicon.txt file into uppercase format| y |
 | | | | | <!--- keeps a blank line between folder types -->
 | PVlm_pre | cleanCOCA.py | prepares original COCA corpus for use in language model | y |
 | PVlm_pre | cleanAllTEDLIUM.sh | runs `cleanTEDLIUM.py` on entire folder of `.stm` files (for lm or trans) | y |
