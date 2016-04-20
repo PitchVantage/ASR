@@ -26,7 +26,8 @@ f = open(sys.argv[1], "rb")
 #Creates a list of words in the lexicon.
 Words=[]
 for line in f:
-   line_split = line.split("\t")
+    #May need to change to "\t" or whatever as needed. Check format of lexicon.txt.
+   line_split = line.split(" ")
    id = line_split[0]
    Words.append(id)
 f.close
