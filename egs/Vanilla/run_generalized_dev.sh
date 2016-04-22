@@ -8,15 +8,18 @@
 
 #Purpose: Keeps the acoustic training, but retrains the language model. Needs to be parameterized. Works with Vanilla egs folder after end-to-end test train run_generalized.sh script has been run.
 
-#Command Line: ./run_generalized_dev.sh -p [# of processors] -n [path/to/training/.wav/files] -t [path/to/testing/.wav/files] -i [path/to/input/folder]
+#Command Line: ./run_generalized_dev.sh -p [# of processors] -t [path/to/testing/.wav/files] -i [path/to/input/folder] -e [path/to/exp/folder] -m [path/to/mfcc/folder] -d [path/to/data/folder]
 
-#Example Command Line: ./run_generalized_dev.sh -p 4 -n /Volumes/poo/Test_dir_one_folder/ -t /Volumes/poo/Easy_Demo/ -i Best_Results_WSJ/input/
+#Example Command Line: ./run_generalized_dev.sh -p 4 -t /Volumes/poo/Easy_Demo/ -i Best_Results_WSJ/input/ -e /Volumes/poo/Example_Egs_Folders_Dev_Script/exp/ -m /Volumes/poo/Example_Egs_Folders_Dev_Script/mfcc/ -d /Volumes/poo/Example_Egs_Folders_Dev_Script/data/
 
 #Command Line Variables:
 # -p = number of processors to use
 # -n = full path of training data    **In a location *OTHER THAN* inside egs/ folder
 # -t = full path of testing data     **In a location *OTHER THAN* inside egs/ folder
 # -a = full path of all all data     **In a location *OTHER THAN* inside egs/ folder
+# -e = full path to exp folder       **In a location *OTHER THAN* inside egs/ folder
+# -m = full path to mfcc folder      **In a location *OTHER THAN* inside egs/ folder
+# -d = full path to data folder      **In a location *OTHER THAN* inside egs/ folder
 # -i = path to input folder
 # -s = percentage of training split (e.g. .8)
 
