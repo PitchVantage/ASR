@@ -22,14 +22,14 @@ done;
 
 # make a two-column list of test utterance ids and their paths
     #feed the test directory
-local/create_wav_scp.pl data/local/${test_dir} data/local/waves.test > \
+local/create_wav_scp.pl ${test_dir} data/local/waves.test > \
     data/local/${test_dir}_wav.scp
-local/create_wav_scp.pl data/local/${test_dir} data/local/waves.test > \
+local/create_wav_scp.pl ${test_dir} data/local/waves.test > \
 data/local/${test_dir}_wav.scp
 
 # need to make these two files of transcriptions:
 # <utterance-id> <text>
-local/create_txt.pl input/transcripts waves.test > data/local${test_dir}.txt
+local/create_txt.pl input/transcripts data/local/waves.test > data/local/${test_dir}.txt
 
 cp input/task.arpabo data/local/lm_tg.arpa
 
