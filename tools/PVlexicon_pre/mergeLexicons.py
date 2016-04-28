@@ -1,6 +1,8 @@
 import sys
 import re
 
+#TODO add capacity to handle multiple pronunciations
+
 #merges two lexicons together
 #note: *not* the most efficient way to do this
 
@@ -75,9 +77,9 @@ while l1 in range(len(lex_master)) and l2 in range(len(lex_minor)):
         word_master = match.group(1)
         key_master = int(match.group(2))
     #current lex_minor word
-    word_minor = lex_minor[l1][0]
+    word_minor = lex_minor[l2][0]
     #current lex_minor transcription
-    trans_minor = lex_minor[l1][1]
+    trans_minor = lex_minor[l2][1]
     #current phonetic key
     key_minor = 0
     #extract multiple pronunciation key if present
@@ -140,26 +142,6 @@ while l1 in range(len(lex_master)):
         fOut.write(word_master + "(" + str(key_master) + ") " + " ".join(trans_master) + "\n")
     #update master counter
     l1 += 1
-    # else:
-    #     #current lex_minor word
-    #     word_minor = lex_minor[l1][0]
-    #     #current lex_minor transcription
-    #     trans_minor = lex_minor[l1][1]
-    #     #current phonetic key
-    #     key_minor = 0
-    #     #extract multiple pronunciation key if present
-    #     if re.match(reg, word_minor):
-    #         match = re.match(reg, word_minor)
-    #         word_minor = match.group(1)
-    #         key_minor = int(match.group(2))
-    #     print("adding word from minor", word_minor)
-    #     #write to file
-    #     if key_minor == 0:
-    #         fOut.write(word_minor + " " + " ".join(trans_minor) + "\n")
-    #     else:
-    #         fOut.write(word_minor + "(" + str(key_minor) + ") " + " ".join(trans_minor) + "\n")
-    #     #update minor counter
-    #     l2 += 1
 
 fOut.close()
 
