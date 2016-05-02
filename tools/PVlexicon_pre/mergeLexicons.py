@@ -1,10 +1,7 @@
 import sys
 import re
 
-#TODO add capacity to handle multiple pronunciations
-
 #merges two lexicons together
-#note: *not* the most efficient way to do this
 
 #sys.argv[1] = full path to location for merged output lexicon
 #sys.argv[2] = lexicon one
@@ -19,7 +16,10 @@ lex_1 = []
 f = open(sys.argv[2], "rb")
 for line in f:
     #split on whitespace
-    split = line.rstrip().split(" ")
+    if "\t" in line:
+        split = line.rstrip().split("\t")
+    else:
+        split = line.rstrip().split(" ")
     #capture word and transcription
     word = split[0]
     trans = split[1:]
@@ -32,7 +32,10 @@ lex_2 = []
 f = open(sys.argv[3], "rb")
 for line in f:
     #split on whitespace
-    split = line.rstrip().split(" ")
+    if "\t" in line:
+        split = line.rstrip().split("\t")
+    else:
+        split = line.rstrip().split(" ")
     #capture word and transcription
     word = split[0]
     trans = split[1:]
@@ -72,7 +75,7 @@ while l1 in range(len(lex_master)) and l2 in range(len(lex_minor)):
     #current lex_master transcription
     trans_master = lex_master[l1][1]
     #current phonetic key
-    key_master = 0
+    key_master = 1
     #extract multiple pronunciation key if present
     if re.match(reg, word_master):
         match = re.match(reg, word_master)
@@ -83,7 +86,7 @@ while l1 in range(len(lex_master)) and l2 in range(len(lex_minor)):
     #current lex_minor transcription
     trans_minor = lex_minor[l2][1]
     #current phonetic key
-    key_minor = 0
+    key_minor = 1
     #extract multiple pronunciation key if present
     if re.match(reg, word_minor):
         match = re.match(reg, word_minor)
@@ -94,7 +97,7 @@ while l1 in range(len(lex_master)) and l2 in range(len(lex_minor)):
     if word_master == word_minor and trans_master == trans_minor:
         print("adding word from master", word_master)
         #write to file
-        if key_master == 0:
+        if key_master == 1:
             fOut.write(word_master + " " + " ".join(trans_master) + "\n")
         else:
             fOut.write(word_master + "(" + str(key_master) + ") " + " ".join(trans_master) + "\n")
@@ -103,7 +106,7 @@ while l1 in range(len(lex_master)) and l2 in range(len(lex_minor)):
         l2 += 1
     elif word_master == word_minor and trans_master != trans_minor:
         print("adding word from master", word_master)
-        if key_master == 0:
+        if key_master == 1:
             fOut.write(word_master + " " + " ".join(trans_master) + "\n")
         else:
             fOut.write(word_master + "(" + str(key_master) + ") " + " ".join(trans_master) + "\n")
@@ -116,7 +119,7 @@ while l1 in range(len(lex_master)) and l2 in range(len(lex_minor)):
         if word_master < word_minor:
             print("adding word from master", word_master)
             #write to file
-            if key_master == 0:
+            if key_master == 1:
                 fOut.write(word_master + " " + " ".join(trans_master) + "\n")
             else:
                 fOut.write(word_master + "(" + str(key_master) + ") " + " ".join(trans_master) + "\n")
@@ -126,7 +129,7 @@ while l1 in range(len(lex_master)) and l2 in range(len(lex_minor)):
         elif word_master > word_minor:
             print("adding word from minor", word_minor)
             #write to file
-            if key_minor == 0:
+            if key_minor == 1:
                 fOut.write(word_minor + " " + " ".join(trans_minor) + "\n")
             else:
                 fOut.write(word_minor + "(" + str(key_minor) + ") " + " ".join(trans_minor) + "\n")
@@ -143,7 +146,7 @@ while l1 in range(len(lex_master)):
     #current lex_master transcription
     trans_master = lex_master[l1][1]
     #current phonetic key
-    key_master = 0
+    key_master = 1
     #extract multiple pronunciation key if present
     if re.match(reg, word_master):
         match = re.match(reg, word_master)
@@ -151,7 +154,7 @@ while l1 in range(len(lex_master)):
         key_master = int(match.group(2))
     print("adding word from master", word_master)
     #write to file
-    if key_master == 0:
+    if key_master == 1:
         fOut.write(word_master + " " + " ".join(trans_master) + "\n")
     else:
         fOut.write(word_master + "(" + str(key_master) + ") " + " ".join(trans_master) + "\n")

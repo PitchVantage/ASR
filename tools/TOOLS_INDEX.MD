@@ -27,6 +27,7 @@ Below are the subfolders for `tools/`:
 | PVanalysis | NE-rate.py | *rough* attempt to estimate ASR success on named entities | y |
 | | | | | <!--- keeps a blank line between folder types -->
 | PVlexicon_pre | mergeLexicons.py | merges two lexicon files into one | y |
+| PVlexicon_pre | mergePhones.py | merges two phones files into one | y |
 | PVlexicon_pre | UpperCase_Dict.py | changes a lexicon.txt file into uppercase format| y |
 | | | | | <!--- keeps a blank line between folder types -->
 | PVlm_pre | cleanCOCA.py | prepares original COCA corpus for use in language model | y |
