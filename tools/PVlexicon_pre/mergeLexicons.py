@@ -63,6 +63,8 @@ while l1 in range(len(lex_master)) and l2 in range(len(lex_minor)):
 # for i in range(len(lex_master)):
     print("l1", l1)
     print("l2", l2)
+    print("current master", lex_master[l1][0], lex_master[l1][1])
+    print("current minor", lex_minor[l2][0], lex_minor[l2][1])
     # if l1 in range(len(lex_master)) and l2 in range(len(lex_minor)):
     print("both lists active")
     #current lex_master word
@@ -99,6 +101,16 @@ while l1 in range(len(lex_master)) and l2 in range(len(lex_minor)):
         #update both counters
         l1 += 1
         l2 += 1
+    elif word_master == word_minor and trans_master != trans_minor:
+        print("adding word from master", word_master)
+        if key_master == 0:
+            fOut.write(word_master + " " + " ".join(trans_master) + "\n")
+        else:
+            fOut.write(word_master + "(" + str(key_master) + ") " + " ".join(trans_master) + "\n")
+        print("adding word from minor with additional pronunciation", word_minor)
+        fOut.write(word_minor + "(" + str(key_master + 1) + ") " + " ".join(trans_minor) + "\n")
+        l1 += 1
+        l2 += 1
     else:
         #if word_master comes before word minor, add word_master
         if word_master < word_minor:
@@ -119,6 +131,9 @@ while l1 in range(len(lex_master)) and l2 in range(len(lex_minor)):
             else:
                 fOut.write(word_minor + "(" + str(key_minor) + ") " + " ".join(trans_minor) + "\n")
             #update minor counter
+            l2 += 1
+        else:
+            l1 += 1
             l2 += 1
 while l1 in range(len(lex_master)):
     # elif l1 in range(len(lex_master)):
