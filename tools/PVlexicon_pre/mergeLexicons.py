@@ -2,6 +2,7 @@ import sys
 import re
 
 #merges two lexicons together
+#NOTE:  They **must both** be sorted alphabetically already!
 
 #sys.argv[1] = full path to location for merged output lexicon
 #sys.argv[2] = lexicon one

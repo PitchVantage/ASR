@@ -1,6 +1,8 @@
 import sys
 
 #merges two phones lists together
+#NOTE:  They **must both** be sorted alphabetically already!
+
 
 #sys.argv[1] = full path to location for merged output phones list
 #sys.argv[2] = phones list one
