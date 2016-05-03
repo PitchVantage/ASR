@@ -22,6 +22,9 @@ Below are the subfolders for `tools/`:
 | PVacous_pre | sphere_to_wav.sh | converts `.sph` to `.wav` using `sph2pipe` | y |
 | | | | | <!--- keeps a blank line between folder types -->
 | PVanalysis | callGoVivace.sh | transcribes single audio file with `goVivace` | y |
+| PVanalysis | compareKaldiGoVivace.sh | compares WER from `kaldi` and `Go Vivace` on a test sets | y | 
+| PVanalysis | evaluateGoVivace-multiTranscript.sh | gets `Go Vivace` results on audio with multiple transcript files | y |
+| PVanalysis | evaluateGoVivace-singleTranscript.sh | gets `Go Vivace` results on audio with one master transcript file | y |
 | PVanalysis | findPercentNE.py | attempts to identify (coarsely) the percent of named entities in a file | y |
 | PVanalysis | makeDataFrame.py | makes a `pandas` dataframe out of a `.results` file | y |
 | PVanalysis | NE-rate.py | *rough* attempt to estimate ASR success on named entities | y |
@@ -32,7 +35,7 @@ Below are the subfolders for `tools/`:
 | | | | | <!--- keeps a blank line between folder types -->
 | PVlm_pre | cleanCOCA.py | prepares original COCA corpus for use in language model | y |
 | PVlm_pre | cleanAllTEDLIUM.sh | runs `cleanTEDLIUM.py` on entire folder of `.stm` files (for lm or trans) | y |
-| PVlm_pre | cleanTEDLIUM.py | prepares single TEDLIUM transcript file for use (in lm or for transcripts)| y |
+| PVlm_pre | cleanTEDLIUM.py | prepares single `TEDLIUM` transcript file for use (in lm or for transcripts)| y |
 | PVlm_pre | Create_lm.sh | creates a trigram lm from a cleaned lm transcript| y |
 | PVlm_pre | Create_lm_start_end.sh | creates a trigram lm from a cleaned lm transcript with start and end markers| y |
 | PVlm_pre | Format_Transcript_for_LM.py | prepares a single transcript file for use in lm | y |
@@ -45,5 +48,5 @@ Below are the subfolders for `tools/`:
 | PVtrans_pre | formatTranscript.pl | swaps `text UttID` to `UttID text` | y | 
 | PVtrans_pre | formatWSJTranscripts.sh | concatenates all `.DOT` files into one file | y |
 | PVtrans_pre | prepareTranscript.pl | cleans up raw transcript files for WER calculation | y |
-| Pvtrans_pre | prepareTranscriptFolder.sh | runs `prepareTranscript.pl` on folder of transcripts | y |
-
+| PVtrans_pre | prepareTranscriptFolder.sh | runs `prepareTranscript.pl` on folder of transcripts | y |
+| PVtrans_pre | unmergeTranscripts.py | makes individual transcript files from a master transcript file | y |
