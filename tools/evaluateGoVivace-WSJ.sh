@@ -3,12 +3,15 @@
 #will run goVivace client over a folder structure of audio and ONE transcript file and evaluate WER for each
 # TODO must be run from tools?
 
-# $1 = location of results
-# $2 = location of audio
+# $1 = full path location of where to write results file
+# $2 = full path location of audio
 # $3 = filetype for audio (e.g. ".wav")
-# $4 = location of gold transcript file
-# $5 = location of goVivace transcripts (using prepareTranscript.pl)
+# $4 = full path location of gold transcript file
+# $5 = full path location of goVivace transcripts (using prepareTranscript.pl)
             #[same as audio].goV
+# $6 = full path location to a temp folder used in the script
+                #linux = /tmp/kaldiEvaluate/
+                #mac = $TMPDIR/kaldiEvaluate/
 
 results=$1
 audio_dir=$2
@@ -16,7 +19,7 @@ audio_type=$3
 gold_file=$4
 goV_dir=$5
 
-tmpFolder=/tmp/kaldiEvaluate/
+tmpFolder=$6
 gold_dir=${tmpFolder}gold_dir/
 
 mkdir $tmpFolder
