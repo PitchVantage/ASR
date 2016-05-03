@@ -48,5 +48,5 @@ Below are the subfolders for `tools/`:
 | PVtrans_pre | formatTranscript.pl | swaps `text UttID` to `UttID text` | y | 
 | PVtrans_pre | formatWSJTranscripts.sh | concatenates all `.DOT` files into one file | y |
 | PVtrans_pre | prepareTranscript.pl | cleans up raw transcript files for WER calculation | y |
-| Pvtrans_pre | prepareTranscriptFolder.sh | runs `prepareTranscript.pl` on folder of transcripts | y |
-
+| PVtrans_pre | prepareTranscriptFolder.sh | runs `prepareTranscript.pl` on folder of transcripts | y |
+| PVtrans_pre | unmergeTranscripts.py | makes individual transcript files from a master transcript file | y |
