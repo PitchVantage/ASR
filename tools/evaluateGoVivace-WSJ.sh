@@ -11,7 +11,9 @@
             #[same as audio].goV
 # $6 = full path location to a temp folder used in the script
                 #linux = /tmp/kaldiEvaluate/
-                #mac = $TMPDIR/kaldiEvaluate/
+                #mac = ${TMPDIR}kaldiEvaluate/      #TODO figure out why this doesn't work on a mac
+
+
 
 results=$1
 audio_dir=$2
