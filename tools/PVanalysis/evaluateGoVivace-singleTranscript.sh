@@ -60,7 +60,6 @@ echo "Building list of files to evaluate"
 #get list of files for which both gold transcript and wave exist
 comm -12 ${tmpFolder}waves.list ${tmpFolder}golds.list >> ${tmpFolder}common.list
 
-
 #if .goV transcripts don't yet exist
 if [ ! -d "$goV_dir" ]; then
 
@@ -73,7 +72,7 @@ if [ ! -d "$goV_dir" ]; then
 
         echo "Calling GoVivace client"
         #send to goVivace client
-        ../callGoVivace.sh text ${audio_dir}${filename}.wav ${goV_dir}${filename}.raw
+        ./callGoVivace.sh text ${audio_dir}${filename}.wav ${goV_dir}${filename}.raw
 
         #wait two seconds for client to close
         sleep 5

@@ -9,10 +9,10 @@
 #./callGoVivace.sh text path/to/sample_audio.wav path/to/transcription.txt
 
 if [ "$1" == "json" ]; then
-    ./goVivaceClient -u ws://pitchvantage.govivace.com:49165/client/ws/speech --save-json-filename $3 $2
+    ../goVivaceClient -u ws://pitchvantage.govivace.com:49165/client/ws/speech --save-json-filename $3 $2
 else
     #bug in client requires json be generated along with plain text
-    ./goVivaceClient -u ws://pitchvantage.govivace.com:49165/client/ws/speech --save-json-filename unneeded.json --save-text-filename $3 $2
+    ../goVivaceClient -u ws://pitchvantage.govivace.com:49165/client/ws/speech --save-json-filename unneeded.json --save-text-filename $3 $2
 
     #remove unneeded json
     rm unneeded.json
