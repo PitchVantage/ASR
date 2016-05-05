@@ -32,6 +32,7 @@ Below are the subfolders for `tools/`:
 | PVlexicon_pre | mergeLexicons.py | merges two lexicon files into one | y |
 | PVlexicon_pre | mergePhones.py | merges two phones files into one | y |
 | PVlexicon_pre | UpperCase_Dict.py | changes a lexicon.txt file into uppercase format| y |
+| PVlexicon_pre | Remove_Duplicates.py | remove duplicates from input file | y |
 | | | | | <!--- keeps a blank line between folder types -->
 | PVlm_pre | cleanCOCA.py | prepares original COCA corpus for use in language model | y |
 | PVlm_pre | cleanAllTEDLIUM.sh | runs `cleanTEDLIUM.py` on entire folder of `.stm` files (for lm or trans) | y |
