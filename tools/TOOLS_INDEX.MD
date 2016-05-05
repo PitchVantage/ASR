@@ -43,7 +43,7 @@ Below are the subfolders for `tools/`:
 | PVlm_pre | Replace_w_XYZ.py | replaces words not in the lexicon with XYZ for a single lm transcript file | y |
 | PVlm_pre | Replace_w_XYZ_and_list_of_unknown_words.py | replaces words not in the lexicon with XYZ for a single lm transcript file and keeps a list of all words replaced with XYZ | y |
 | | | | | <!--- keeps a blank line between folder types -->
-| PVmisc | geVocabSize.py | calculates the vocabulary size of a subset of transcripts | y | 
+| PVmisc | getVocabSize.py | calculates the vocabulary size of a subset of transcripts | y | 
 | | | | | <!--- keeps a blank line between folder types -->
 | PVtrans_pre | cleanTranscriptDuplicates.py | removed duplicates transcripts that were generated | n |
 | PVtrans_pre | Create_Test_Transcript.sh | create a transcript file with only items from the test set | y |
