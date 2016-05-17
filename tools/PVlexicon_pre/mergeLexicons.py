@@ -62,6 +62,9 @@ l2 = 0
 print("master", range(len(lex_master)))
 print("minor", range(len(lex_minor)))
 
+#variable to house last transcription
+lastTrans = ""
+
 #use longer lexicon for iteration
 while l1 in range(len(lex_master)) and l2 in range(len(lex_minor)):
 # for i in range(len(lex_master)):
@@ -98,44 +101,62 @@ while l1 in range(len(lex_master)) and l2 in range(len(lex_minor)):
     if word_master == word_minor and trans_master == trans_minor:
         print("adding word from master", word_master)
         #write to file
-        if key_master == 1:
-            fOut.write(word_master + " " + " ".join(trans_master) + "\n")
-        else:
-            fOut.write(word_master + "(" + str(key_master) + ") " + " ".join(trans_master) + "\n")
+        #to ensure no duplicate writing to file
+        if trans_master != lastTrans:
+            if key_master == 1:
+                fOut.write(word_master + " " + " ".join(trans_master) + "\n")
+            else:
+                fOut.write(word_master + "(" + str(key_master) + ") " + " ".join(trans_master) + "\n")
+            #update both counters
+        l1 += 1
+        l2 += 1
+        #update lastTrans
+        lastTrans = trans_master
+    elif word_master == word_minor and trans_master != trans_minor:
+        print("adding word from master", word_master)
+        #write to file
+        #to ensure no duplicate writing to file
+        if trans_master != lastTrans:
+            if key_master == 1:
+                fOut.write(word_master + " " + " ".join(trans_master) + "\n")
+            else:
+                fOut.write(word_master + "(" + str(key_master) + ") " + " ".join(trans_master) + "\n")
+            print("adding word from minor with additional pronunciation", word_minor)
+            fOut.write(word_minor + "(" + str(key_master + 1) + ") " + " ".join(trans_minor) + "\n")
         #update both counters
         l1 += 1
         l2 += 1
-    elif word_master == word_minor and trans_master != trans_minor:
-        print("adding word from master", word_master)
-        if key_master == 1:
-            fOut.write(word_master + " " + " ".join(trans_master) + "\n")
-        else:
-            fOut.write(word_master + "(" + str(key_master) + ") " + " ".join(trans_master) + "\n")
-        print("adding word from minor with additional pronunciation", word_minor)
-        fOut.write(word_minor + "(" + str(key_master + 1) + ") " + " ".join(trans_minor) + "\n")
-        l1 += 1
-        l2 += 1
+        #update lastTrans
+        lastTrans = trans_master
     else:
         #if word_master comes before word minor, add word_master
         if word_master < word_minor:
             print("adding word from master", word_master)
             #write to file
-            if key_master == 1:
-                fOut.write(word_master + " " + " ".join(trans_master) + "\n")
-            else:
-                fOut.write(word_master + "(" + str(key_master) + ") " + " ".join(trans_master) + "\n")
+            #to ensure no duplicate writing to file
+            if trans_master != lastTrans:
+                if key_master == 1:
+                    fOut.write(word_master + " " + " ".join(trans_master) + "\n")
+                else:
+                    fOut.write(word_master + "(" + str(key_master) + ") " + " ".join(trans_master) + "\n")
             #update master counter
             l1 += 1
+            #update lastTrans
+            lastTrans = trans_master
     #if word_minor comes before word_master, add word_minor
         elif word_master > word_minor:
             print("adding word from minor", word_minor)
             #write to file
-            if key_minor == 1:
-                fOut.write(word_minor + " " + " ".join(trans_minor) + "\n")
-            else:
-                fOut.write(word_minor + "(" + str(key_minor) + ") " + " ".join(trans_minor) + "\n")
+            #to ensure no duplicate writing to file
+            if trans_minor != lastTrans:
+                if key_minor == 1:
+                    fOut.write(word_minor + " " + " ".join(trans_minor) + "\n")
+                else:
+                    fOut.write(word_minor + "(" + str(key_minor) + ") " + " ".join(trans_minor) + "\n")
             #update minor counter
             l2 += 1
+            #update lastTrans
+            lastTrans = trans_minor
         else:
             l1 += 1
             l2 += 1
@@ -155,12 +176,16 @@ while l1 in range(len(lex_master)):
         key_master = int(match.group(2))
     print("adding word from master", word_master)
     #write to file
-    if key_master == 1:
-        fOut.write(word_master + " " + " ".join(trans_master) + "\n")
-    else:
-        fOut.write(word_master + "(" + str(key_master) + ") " + " ".join(trans_master) + "\n")
+    #to ensure no duplicate writing to file
+    if trans_master != lastTrans:
+        if key_master == 1:
+            fOut.write(word_master + " " + " ".join(trans_master) + "\n")
+        else:
+            fOut.write(word_master + "(" + str(key_master) + ") " + " ".join(trans_master) + "\n")
     #update master counter
     l1 += 1
+    #update lastTrans
+    lastTrans = trans_master
 
 fOut.close()
 

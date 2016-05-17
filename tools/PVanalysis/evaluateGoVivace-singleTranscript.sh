@@ -78,7 +78,7 @@ if [ ! -d "$goV_dir" ]; then
         sleep 5
 
         #clean transcript for WER comparison
-        ../PV_trans_pre/prepareTranscript.pl ${goV_dir}${filename}.raw ${filename} ${goV_dir}${filename}.goV
+        ../PVtrans_pre/prepareTranscript.pl ${goV_dir}${filename}.raw ${filename} ${goV_dir}${filename}.goV
 
         #remove .raw file, keeping only cleaned .goV
         rm ${goV_dir}$filename.raw
