@@ -2,8 +2,8 @@ There are three test sets:
 
 Test Set | Description | Size x Length | Reference
 ---|---|---
-WSJ | Read and spontaneous speech | X single sentences | 
-TED | Full TED talks | x 20+mins |  
+WSJ | Read and spontaneous speech |  620 X single sentences | ???
+TED | Full TED (talks segmented arbitrarily) | 11 x 20+mins | [TED-LIUM Release 2](http://www-lium.univ-lemans.fr/en/content/ted-lium-corpus)
 Pitch | Science related talks | 4 x 10+mins | PitchVantage proprietary data
 
 Below are baseline results from `GoVivace` run in 05/2016:
@@ -19,7 +19,6 @@ Below are up-to-date results from `kaldi`:
 
 System | Date (mo/yr) | Acoustic Data | LM/Lexicon | Test Data | WER
 ---|---|---|---|---|---
-kaldi | 04/16 | WSJ | WSJ | WSJ |
-kaldi | 05/16 | WSJ | WSJ | TED |
-kaldi | 05/16 | WSJ | WSJ | Pitch |
-kaldi | 05/16 | TED | WSJ + TED | TED |
+kaldi | 04/16 | WSJ | WSJ | WSJ w/ XYZ | 20.02%
+kaldi | 04/16 | TED - segmented | TED w/ XYZ | TED | 41.46%
+kaldi | 05/16 | TED | TED | Pitch w/ XYZ | 63.3%
