@@ -21,7 +21,7 @@ How to Create Input Files
 --------------------------
 1) lexicon_nosil.txt
 - `tools/PVlexicon_pre/UpperCase_Dict.py`
-- Add 'XYZ XYZP' to lexicon_nosil.txt 
+- Add `XYZ XYZP` to lexicon_nosil.txt 
 - Add lexicon_nosil.txt to egs input folder
 
 2) lexicon.txt
