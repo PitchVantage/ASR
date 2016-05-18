@@ -21,5 +21,5 @@ System | Date (mo/yr) | Acoustic Data | LM/Lexicon | Test Data | WER
 ---|---|---|---|---|---
 kaldi | 04/16 | WSJ | WSJ w/ XYZ | WSJ w/ XYZ | 20.02%
 kaldi | 04/16 | TED - segmented | TED w/ XYZ | TED w/ XYZ | 41.46%
-kaldi | 05/16 | TED | TED w/ XYZ | Pitch w/ XYZ | 63.3%
+kaldi | 05/16 | TED - segmented | TED w/ XYZ | Pitch w/ XYZ | 63.3%
 kaldi | 05/16 | WSJ | WSJ w/ XYZ | Pitch w/ XYZ | 75.9%
