@@ -4,12 +4,10 @@ KALDI - SETUP
 GITHUB
 -------
 
-1. Clone the repository [http://kaldi.sourceforge.net/tutorial_git.html]
-```git clone https://github.com/kaldi-asr/kaldi.git --branch master --single-branch --origin golden```
+1. Clone the repository 
+```git clone https://github.com/PitchVantage/ASR.git```
 
-2. Immediately setup a branch for our use
-	*prevents pushing to the master
-```git checkout -b pitchVantageKALDI```
+2. Checkout branch `pitchKaldi`
 
 
 INSTALL DEPENDENCIES
@@ -19,17 +17,17 @@ INSTALL DEPENDENCIES
 
 1. go to /tools and open INSTALL
 
-1a. ```extras/check_dependencies.sh```
-1b. do what it says
-1c.  ```make -j 4```		*for multi-cores
+    - ```extras/check_dependencies.sh```
+    - do what it says
+    - ```make -j 4```		*for multi-cores
 	OR
 	```make```			*for one core
 
 2. go to /src and open INSTALL
 
-2a. ```./configure```
-2b. ```make depend -j 4```		*for multi-cores
-2c. ```make -j 4```
+    - ```./configure```
+    - ```make depend -j 4```		*for multi-cores
+    - ```make -j 4```
 
 3. go to `tools/extras/` and run `install_irstlm.sh`
 
