@@ -9,6 +9,7 @@
 #./callGoVivace.sh text path/to/sample_audio.wav path/to/transcription.txt
 
 ##:49169 is `updated` client
+##:49165 is `old` client
 
 if [ "$1" == "json" ]; then
 #    ../goVivaceClient -u ws://pitchvantage.govivace.com:49165/client/ws/speech --save-json-filename $3 $2
