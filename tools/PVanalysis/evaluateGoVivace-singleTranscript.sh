@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 #will run goVivace client over a folder structure of audio and ONE transcript file and evaluate WER for each
-# TODO must be run from tools?
 
 # $1 = full path location of where to write results file
 # $2 = full path location of audio
