@@ -313,6 +313,7 @@ rm -rf train_dir
 rm -rf input
 
 
+
 printf "\n####=====================####\n";
 printf "#### GENERATE PLAIN TEXT OUTPUT ####\n";
 printf "####=====================####\n\n";
@@ -327,6 +328,7 @@ done
 #words.txt is the index->word file
 
 #and $x is the .tra file for input
+
 
 
 printf "\n####=========####\n";
