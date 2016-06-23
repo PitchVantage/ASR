@@ -314,23 +314,6 @@ rm -rf input
 
 
 
-printf "\n####=====================####\n";
-printf "#### GENERATE PLAIN TEXT OUTPUT ####\n";
-printf "####=====================####\n\n";
-
-# generates plain text output for each of the three (always three?) .tra files
-for x in exp/triphones/decode_test_dir/scoring/11.tra; do
-    utils/int2sym.pl -f 2- exp/triphones/graph/words.txt $x
-#this is the main "decoding" script,
-done
-#-f 2 skips the first token since it's the utterance ID,
-
-#words.txt is the index->word file
-
-#and $x is the .tra file for input
-
-
-
 printf "\n####=========####\n";
 printf "#### Finished ####\n";
 printf "####===========####\n\n";
