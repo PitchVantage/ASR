@@ -14,13 +14,13 @@
 
 #Command Line Variables:
 # -p = number of processors to use
-# -n = full path of training data    **In a location *OTHER THAN* inside egs/ folder
-# -t = full path of testing data     **In a location *OTHER THAN* inside egs/ folder
-# -a = full path of all all data     **In a location *OTHER THAN* inside egs/ folder
-# -e = full path to exp folder       **In a location *OTHER THAN* inside egs/ folder
-# -m = full path to mfcc folder      **In a location *OTHER THAN* inside egs/ folder
-# -d = full path to data folder      **In a location *OTHER THAN* inside egs/ folder
-# -i = path to input folder
+# -n = full path of training data    (`.wav` files for training)    **In a location *OTHER THAN* inside egs/ folder
+# -t = full path of testing data     (`.wav` files for testing)     **In a location *OTHER THAN* inside egs/ folder
+# -a = full path of all all data     (all `.wav` files, not yet split into training and testing)    **In a location *OTHER THAN* inside egs/ folder
+# -e = full path to exp folder       (the entire `exp` folder, found in `data/kaldi/Input_Parameters/exp/)  **In a location *OTHER THAN* inside egs/ folder
+# -m = full path to mfcc folder      (the entire `mfcc` folder, found in `data/kaldi/Input_Parameters/mfcc/)    **In a location *OTHER THAN* inside egs/ folder
+# -d = full path to data folder      (the entire `data` folder, found in `data/kaldi/Input_Parameters/data/)    **In a location *OTHER THAN* inside egs/ folder
+# -i = path to input folder           (the entire `input` folder, containing the `lexicon`s, `phones`, `language model`, and `transcripts`)
 # -s = percentage of training split (e.g. .8)
 
 # if needing split...
