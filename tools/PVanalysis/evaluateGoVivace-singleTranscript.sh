@@ -26,6 +26,9 @@ gold_dir=${tmpFolder}gold_dir/
 mkdir $tmpFolder
 mkdir $gold_dir
 
+
+
+
 echo "Checking audio files"
 
 #get a list of all audio, sorted, and write to list file
@@ -41,6 +44,8 @@ for i in ${ALLAUDIO[@]}; do
 done
 
 echo "Checking gold transcript file"
+echo $gold_file
+echo $tmpFolder
 
 #write each utterance ID to golds.list
 #while IFS=$' ' read -r ID; do       #pay attention only to the ID
