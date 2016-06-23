@@ -1,7 +1,7 @@
 There are three test sets:
 
 Test Set | Description | Size x Length | Reference
----|---|---
+---|---|---|---
 WSJ | Read and spontaneous speech |  620 X single sentences | Continuous Speech Recognition CSR Corpus: Phase 2 (WSJ1)
 TED | Full TED (talks segmented arbitrarily) | 11 x 20+mins (segmented) | TED-LIUM Release 1
 Pitch | Science related talks | 4 x 10+mins (unsegmented) | PitchVantage proprietary data
