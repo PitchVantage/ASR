@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-#calls goVivace client (which should be in /tools
+#calls goVivace client (which should be in /tools)
 
 # $1 = filetype of output ("json" or "text")
 # $2 = full file path of single audio to transcribe
