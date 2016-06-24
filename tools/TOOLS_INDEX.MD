@@ -26,6 +26,7 @@ Below are the subfolders for `tools/`:
 | PVanalysis | compareKaldiGoVivace.sh | compares WER from `kaldi` and `Go Vivace` on a test sets | y | 
 | PVanalysis | evaluateGoVivace-multiTranscript.sh | gets `Go Vivace` results on audio with multiple transcript files | y |
 | PVanalysis | evaluateGoVivace-singleTranscript.sh | gets `Go Vivace` results on audio with one master transcript file | y |
+| PVanalysis | evaluateWatson-singleTranscript.sh | gets `Watson` results on audio with one master transcript file |y|
 | PVanalysis | findPercentNE.py | attempts to identify (coarsely) the percent of named entities in a file | y |
 | PVanalysis | makeDataFrame.py | makes a `pandas` dataframe out of a `.results` file | y |
 | PVanalysis | NE-rate.py | *rough* attempt to estimate ASR success on named entities | y |

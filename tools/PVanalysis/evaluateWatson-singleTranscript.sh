@@ -1,25 +1,24 @@
 #!/usr/bin/env bash
 
-#will run goVivace client over a folder structure of audio and ONE transcript file and evaluate WER for each
+#will run Watson API over a folder structure of audio and ONE transcript file and evaluate WER for each
 
 
 # $1 = full path location of where to write results file
 # $2 = full path location of audio
 # $3 = filetype for audio (e.g. ".wav")             #TODO is this parameter even used right now?
 # $4 = full path location of gold transcript file
-# $5 = full path location of goVivace transcripts (using prepareTranscript.pl)
-            #[same as audio].goV
+# $5 = full path location of Watson transcripts (using prepareTranscript.pl)
+            #[same as audio].wat
 # $6 = full path location to a temp folder used in the script
                 #linux = /tmp/kaldiEvaluate/
                 #mac = ${TMPDIR}kaldiEvaluate/      #TODO figure out why this doesn't work on a mac
-
 
 
 results=$1
 audio_dir=$2
 audio_type=$3
 gold_file=$4
-goV_dir=$5
+wat_dir=$5
 
 tmpFolder=$6
 gold_dir=${tmpFolder}gold_dir/
@@ -54,42 +53,47 @@ echo "Building list of files to evaluate"
 #get list of files for which both gold transcript and wave exist
 comm -12 ${tmpFolder}waves.list ${tmpFolder}golds.list >> ${tmpFolder}common.list
 
-#if .goV transcripts don't yet exist
-if [ ! -d "$goV_dir" ]; then
+#if .wat transcripts don't yet exist
+if [ ! -d "$wat_dir" ]; then
 
-    #make directory for .goV
-    mkdir $goV_dir
+    #make directory for .wat
+    mkdir $wat_dir
 
     #iterate through commons.list
     while read filename
     do
 
-        echo "Calling GoVivace client"
-        #send to goVivace client
-        ./callGoVivace.sh text ${audio_dir}${filename}.wav ${goV_dir}${filename}.raw
+        echo "Calling Watson client"
+        #send to Watson client
+        ./callWatson.sh ${audio_dir}${filename}.wav ${wat_dir}${filename}.json 1 1.0
 
-        #wait five seconds for client to close
-        sleep 5
+        #wait two seconds for client to close
+        sleep 2
 
+        echo "Parsing Watson output"
+        #parse json
+        python ../PVtrans_pre/parseWatsonJSON.py ${wat_dir}${filename}.json ${wat_dir}${filename}.raw
+
+        echo "Cleaning Watson output"
         #clean transcript for WER comparison
-        ../PVtrans_pre/prepareTranscript.pl ${goV_dir}${filename}.raw ${filename} ${goV_dir}${filename}.goV
+        ../PVtrans_pre/prepareTranscript.pl ${wat_dir}${filename}.raw ${filename} ${wat_dir}${filename}.wat
 
-        #remove .raw file, keeping only cleaned .goV
-        rm ${goV_dir}${filename}.raw
+        #remove .json and .raw file, keeping only cleaned .wat
+        rm ${wat_dir}${filename}.raw
+        rm ${wat_dir}${filename}.json
 
         #make a file of only that utterance ID (.gold)
         grep  -F $filename $gold_file | uniq >> ${gold_dir}${filename}.rawGold          #why is grep duplicating?  uniq fixes it
 
         #clean transcript for WER comparison
         ../PVtrans_pre/prepareTranscript.pl ${gold_dir}${filename}.rawGold ${filename} ${gold_dir}${filename}.gold
-#        ./prepareTranscript.pl ${gold_dir}${filename}.rawGold "" ${gold_dir}${filename}.gold
 
         echo "Writing results to file"
         #prepare results file
         echo "============" >> $results
         echo $filename >> $results
-        #send resulting .goV transcript and .gold transcript to compute-wer.cc
-        ../../src/bin/compute-wer --text --mode=present ark:${gold_dir}${filename}.gold ark:${goV_dir}${filename}.goV >> $results
+        #send resulting .wat transcript and .gold transcript to compute-wer.cc
+        ../../src/bin/compute-wer --text --mode=present ark:${gold_dir}${filename}.gold ark:${wat_dir}${filename}.wat >> $results
 
         #delete .gold file
         rm ${gold_dir}${filename}.gold
@@ -113,8 +117,8 @@ else
         #prepare results file
         echo "============" >> $results
         echo $filename >> $results
-        #send resulting .goV transcript and .gold transcript to compute-wer.cc
-        ../../src/bin/compute-wer --text --mode=present ark:${gold_dir}${filename}.gold ark:${goV_dir}${filename}.goV >> $results
+        #send resulting .wat transcript and .gold transcript to compute-wer.cc
+        ../../src/bin/compute-wer --text --mode=present ark:${gold_dir}${filename}.gold ark:${wat_dir}${filename}.wat >> $results
 
         #delete .gold file
 #        rm ${gold_dir}${filename}.gold
@@ -126,6 +130,3 @@ fi
 
 #cleaning up temp files
 rm -r $tmpFolder
-
-
-
