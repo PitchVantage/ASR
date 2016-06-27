@@ -44,15 +44,15 @@ while (my $line = <TRANSCRIPT>) {
         my @sentenceTokens = @splitLine[1..$sentenceLength];    #take tokens of sentence (dropping existing utteranceID)
         my $sentence = join(" ", @sentenceTokens);
         $sentence =~ s/([A-Z])/\L$1/g;      #convert all to lowercase
+        $sentence =~ s/%[a-z]+//g;          #remove %HESITATION (used by Watson)
         $sentence =~ s/\p{Punct}//g;               #remove punctuation
         $sentence =~ s/ {2,}/ /g;              #remove extra spaces
         print($output "$utteranceID $sentence")
     } else {
         $line =~ s/([A-Z])/\L$1/g;      #convert all to lowercase
-#       $line =~ s/[\.\,\?\-]//g;               #remove punctuation
+        $line =~ s/%[a-z]+//g;          #remove %HESITATION (used by Watson)
         $line =~ s/\p{Punct}//g;               #remove punctuation
         $line =~ s/ {2,}/ /g;              #remove extra spaces
-#       print($output "$i $line");
         print($output "$ARGV[1] $line");
     }
 }
