@@ -2,10 +2,9 @@
 
 #will run goVivace client over a folder structure of audio and ONE transcript file and evaluate WER for each
 
-
 # $1 = full path location of where to write results file
 # $2 = full path location of audio
-# $3 = filetype for audio (e.g. ".wav")             #TODO is this parameter even used right now?
+# $3 = filetype for audio (e.g. ".wav")
 # $4 = full path location of gold transcript file
 # $5 = full path location of goVivace transcripts (using prepareTranscript.pl)
             #[same as audio].goV
@@ -27,6 +26,9 @@ gold_dir=${tmpFolder}gold_dir/
 mkdir $tmpFolder
 mkdir $gold_dir
 
+
+
+
 echo "Checking audio files"
 
 #get a list of all audio, sorted, and write to list file
@@ -42,14 +44,22 @@ for i in ${ALLAUDIO[@]}; do
 done
 
 echo "Checking gold transcript file"
+echo $gold_file
+echo $tmpFolder
 
 #write each utterance ID to golds.list
+#while IFS=$' ' read -r ID; do       #pay attention only to the ID
+#    echo ${ID} >> ${tmpFolder}golds.list
+#done < $gold_file
 cut -d' ' -f1 ${gold_file} >> ${tmpFolder}goldsUnsorted.list
 
 #sort golds list
 sort ${tmpFolder}goldsUnsorted.list >> ${tmpFolder}golds.list
 
 echo "Building list of files to evaluate"
+
+#get just list of files in transcript
+    #take first item in each line
 
 #get list of files for which both gold transcript and wave exist
 comm -12 ${tmpFolder}waves.list ${tmpFolder}golds.list >> ${tmpFolder}common.list
@@ -68,14 +78,14 @@ if [ ! -d "$goV_dir" ]; then
         #send to goVivace client
         ./callGoVivace.sh text ${audio_dir}${filename}.wav ${goV_dir}${filename}.raw
 
-        #wait five seconds for client to close
+        #wait two seconds for client to close
         sleep 5
 
         #clean transcript for WER comparison
         ../PVtrans_pre/prepareTranscript.pl ${goV_dir}${filename}.raw ${filename} ${goV_dir}${filename}.goV
 
         #remove .raw file, keeping only cleaned .goV
-        rm ${goV_dir}${filename}.raw
+        rm ${goV_dir}$filename.raw
 
         #make a file of only that utterance ID (.gold)
         grep  -F $filename $gold_file | uniq >> ${gold_dir}${filename}.rawGold          #why is grep duplicating?  uniq fixes it
