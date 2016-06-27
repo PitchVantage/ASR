@@ -8,7 +8,7 @@
 
 #./callGoVivace.sh text path/to/sample_audio.wav path/to/transcription.txt
 
-##:49169 is `updated` client
+##:49169 is `updated` client - currently (6/2016) NOT performing well
 ##:49165 is `old` client
 
 if [ "$1" == "json" ]; then
