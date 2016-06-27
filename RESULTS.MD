@@ -15,7 +15,7 @@ Watson | WSJ | ???
 GoVivace | TED | 14.2%
 Watson | TED | ???
 GoVivace | Pitch | 21.1%
-Watsno | Pitch | ???
+Watson | Pitch | 21.5%
 
 
 Below are up-to-date results from `kaldi`:
