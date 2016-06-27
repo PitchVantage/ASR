@@ -12,6 +12,6 @@ write = open(sys.argv[2], "wb")
 results = data["results"]
 
 for i in range(len(results)):
-	write.write(results[i]["alternatives"][0]["transcript"] + "\n")
+	write.write(results[i]["alternatives"][0]["transcript"])
 
 write.close()
