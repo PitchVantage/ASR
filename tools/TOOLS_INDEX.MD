@@ -22,9 +22,11 @@ Below are the subfolders for `tools/`:
 | PVacous_pre | sphere_to_wav.sh | converts `.sph` to `.wav` using `sph2pipe` | y |
 | | | | | <!--- keeps a blank line between folder types -->
 | PVanalysis | callGoVivace.sh | transcribes single audio file with `goVivace` | y |
+| PVanalysis | callWatson.sh | transcribes single audio file with `Watson` |y|
 | PVanalysis | compareKaldiGoVivace.sh | compares WER from `kaldi` and `Go Vivace` on a test sets | y | 
 | PVanalysis | evaluateGoVivace-multiTranscript.sh | gets `Go Vivace` results on audio with multiple transcript files | y |
 | PVanalysis | evaluateGoVivace-singleTranscript.sh | gets `Go Vivace` results on audio with one master transcript file | y |
+| PVanalysis | evaluateWatson-singleTranscript.sh | gets `Watson` results on audio with one master transcript file |y|
 | PVanalysis | findPercentNE.py | attempts to identify (coarsely) the percent of named entities in a file | y |
 | PVanalysis | makeDataFrame.py | makes a `pandas` dataframe out of a `.results` file | y |
 | PVanalysis | NE-rate.py | *rough* attempt to estimate ASR success on named entities | y |
@@ -49,6 +51,7 @@ Below are the subfolders for `tools/`:
 | PVtrans_pre | Create_Test_Transcript.sh | create a transcript file with only items from the test set | y |
 | PVtrans_pre | formatTranscript.pl | swaps `text UttID` to `UttID text` | y | 
 | PVtrans_pre | formatWSJTranscripts.sh | concatenates all `.DOT` files into one file | y |
+| PVtrans_pre | parseWatsonJSON.py | parses the original `Watson` `.json` into plain `txt` |y|
 | PVtrans_pre | prepareTranscript.pl | cleans up raw transcript files for WER calculation | y |
 | PVtrans_pre | prepareTranscriptFolder.sh | runs `prepareTranscript.pl` on folder of transcripts | y |
 | PVtrans_pre | unmergeTranscripts.py | makes individual transcript files from a master transcript file | y |

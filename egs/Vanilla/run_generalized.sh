@@ -312,6 +312,8 @@ rm -rf test_dir
 rm -rf train_dir
 rm -rf input
 
+
+
 printf "\n####=========####\n";
 printf "#### Finished ####\n";
 printf "####===========####\n\n";
