@@ -11,7 +11,7 @@ Below are baseline results from `GoVivace` run in 05/2016:
 System | Test Data | WER
 |---|---|---
 GoVivace | WSJ | 17.3%
-Watson | WSJ | ???
+Watson | WSJ | 14.8%
 GoVivace | TED | 14.2%
 Watson | TED | 15.4%
 GoVivace | Pitch | 21.1%
