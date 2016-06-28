@@ -13,7 +13,7 @@ System | Test Data | WER
 GoVivace | WSJ | 17.3%
 Watson | WSJ | ???
 GoVivace | TED | 14.2%
-Watson | TED | ???
+Watson | TED | 15.4%
 GoVivace | Pitch | 21.1%
 Watson | Pitch | 21.5%
 
