@@ -6,7 +6,7 @@
 #Author: Multiple
 #Last Updated: 05_02_16
 
-#Purpose: Runs end-to-end train and test with segment files. Segments files are specific to train and test and can ONLY list the files being used. You can't use a "master" segments file for both train and test.
+#Purpose: Runs end-to-end train and test with segment files where *both TRAIN and TEST* are segmented. Segments files are specific to train and test and can ONLY list the files being used. You can't use a "master" segments file for both train and test.
 
 #Command Line: ./run_generalized_segments.sh -p [# of processors] -n [path/to/training/.wav/files] -t [path/to/testing/.wav/files] -i [path/to/input/folder] -i [path/to/input/folder] -g [path/to/train/segments] -z [path/to/test/segments]
 

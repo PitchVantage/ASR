@@ -30,7 +30,7 @@ for line in f:
    line_split = line.split(" ")
    id = line_split[0]
    Words.append(id)
-f.close
+f.close()
 
 #For each word in the transcript, if it is NOT in the lexicon, then replace with XYZ. Write to an output.txt file.
 f = open(sys.argv[2], "rb")
@@ -45,8 +45,8 @@ for line in f:
             NEW_line.append(token)
     Sentence=" ".join(NEW_line)
     f3.write(Sentence+"\n")
-f.close
-f3.close
+f.close()
+f3.close()
 
 
 
