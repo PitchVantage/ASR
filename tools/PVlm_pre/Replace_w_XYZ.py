@@ -2,8 +2,8 @@
 #/usr/local/bin
 #!/usr/bin/python
 
-import re, locale
 import sys
+from collections import Counter
 
 #Script: Replace_w_XYZ.py
 #Author: Megan Willi
@@ -23,13 +23,13 @@ import sys
 #Reads in lexicon .txt file.
 f = open(sys.argv[1], "rb")
 
-#Creates a list of words in the lexicon.
-Words=[]
+#Creates a counter of words in the lexicon
+cLex = Counter()
 for line in f:
     #May need to change to "\t" or whatever as needed. Check format of lexicon.txt.
    line_split = line.split(" ")
    id = line_split[0]
-   Words.append(id)
+   cLex[id]+=1
 f.close()
 
 #For each word in the transcript, if it is NOT in the lexicon, then replace with XYZ. Write to an output.txt file.
@@ -39,7 +39,7 @@ for line in f:
     NEW_line=[]
     line_split = line.rstrip().split(" ")
     for token in line_split:
-        if token not in Words:
+        if not cLex[token]:
             NEW_line.append("XYZ")
         else:
             NEW_line.append(token)
