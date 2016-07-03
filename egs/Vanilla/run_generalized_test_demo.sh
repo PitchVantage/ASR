@@ -18,7 +18,7 @@
 # -t = full path of testing data     **In a location *OTHER THAN* inside egs/ folder
 # -g = full path to graph folder     **In a location *OTHER THAN* inside egs/ folder
 # -m = full path to final.mdl file   **In a location *OTHER THAN* inside egs/ folder
-# -a = full path of all all data     **In a location *OTHER THAN* inside egs/ folder
+# -a = full path of all data     **In a location *OTHER THAN* inside egs/ folder
 # -i = full path to input folder     **In a location *OTHER THAN* inside egs/ folder
 # -e = full path to experiment folder     **In a location *OTHER THAN* inside egs/ folder
 # -f = full path to mfcc folder     **In a location *OTHER THAN* inside egs/ folder

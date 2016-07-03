@@ -6,7 +6,7 @@
 #Author: Multiple
 #Last Updated: 04_19_16
 
-#Purpose: Runs end-to-end train and test. Works with Vanilla egs folder framework.
+#Purpose: Runs end-to-end train and test. Works with Vanilla egs folder framework.  Requires
 
 #Command Line: ./run_generalized.sh -p [# of processors] -n [path/to/training/.wav/files] -t [path/to/testing/.wav/files] -i [path/to/input/folder]
 
@@ -16,7 +16,7 @@
 # -n = full path of training data    **In a location *OTHER THAN* inside egs/ folder
 # -t = full path of testing data     **In a location *OTHER THAN* inside egs/ folder
 # -a = full path of all all data     **In a location *OTHER THAN* inside egs/ folder
-# -i = full path to input folder
+# -i = full path to input folder     (the entire `input` folder, containing the `lexicon`s, `phones`, `language model`, and `transcripts`)
 # -s = percentage of training split (e.g. .8)
 
 # if needing split...

@@ -6,7 +6,7 @@
 #Author: Multiple
 #Last Updated: 04_19_16
 
-#Purpose: Keeps the acoustic training, but retrains the language model. Needs to be parameterized. Works with Vanilla egs folder after end-to-end test train run_generalized.sh script has been run.
+#Purpose: Keeps the acoustic training (doesn't require building of `mfcc`'s), but retrains the language model. Needs to be parameterized. Works with Vanilla egs folder after end-to-end test train run_generalized.sh script has been run.
 
 #Command Line: ./run_generalized_dev.sh -p [# of processors] -t [path/to/testing/.wav/files] -i [path/to/input/folder] -e [path/to/exp/folder] -m [path/to/mfcc/folder] -d [path/to/data/folder]
 

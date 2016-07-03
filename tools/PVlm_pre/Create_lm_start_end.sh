@@ -4,7 +4,7 @@
 #Author: Megan Willi
 #Last Updated: 04_18_16
 
-#Purpose:Read in clean, formatted, uppercase lm transcript. Output language model created from the lm transcript with start (i.e. <s>) and end (i.e. </s>) markers included.
+#Purpose: Read in clean, formatted, uppercase lm transcript. Output language model created from the lm transcript with start (i.e. <s>) and end (i.e. </s>) markers included.
 #Command Line: ./Create_lm_start_end.sh [path/to/input/CLEAN_transcripts/file] [path/to/output/lm.arpabo/file]
 
 #Example Command Line: ./Create_lm_start_end.sh CLEAN_transcript.txt Output_lm.arpabo

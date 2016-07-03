@@ -11,9 +11,9 @@ Below are baseline results from `GoVivace` run in 05/2016:
 System | Test Data | WER
 |---|---|---
 GoVivace | WSJ | 17.3%
-Watson | WSJ | ???
+Watson | WSJ | 14.8%
 GoVivace | TED | 14.2%
-Watson | TED | ???
+Watson | TED | 15.4%
 GoVivace | Pitch | 21.1%
 Watson | Pitch | 21.5%
 
@@ -23,7 +23,7 @@ Below are up-to-date results from `kaldi`:
 System | Date (mo/yr) | Acoustic Data | LM/Lexicon | Test Data | WER
 ---|---|---|---|---|---
 kaldi | 04/16 | WSJ | WSJ w/ XYZ | WSJ w/ XYZ | 20.02%
-kaldi | 06/16 | WSJ | WSJ + TED + COCA - unsegmented w/ XYZ | WSJ w/ XYZ | 17.08%
+kaldi | 06/16 | WSJ | WSJ + TED + COCA - unsegmented w/ XYZ | WSJ w/ XYZ | ???
 kaldi | 04/16 | TED - segmented | TED w/ XYZ | TED - segmented w/ XYZ | 41.46%
 kaldi | 05/16 | TED - segmented | TED w/ XYZ | Pitch - unsegmented w/ XYZ | 63.3%
 kaldi | 05/16 | WSJ | WSJ w/ XYZ | Pitch - unsegmented w/ XYZ | 75.9%

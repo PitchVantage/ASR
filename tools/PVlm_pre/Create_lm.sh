@@ -4,7 +4,7 @@
 #Author: Megan Willi
 #Last Updated: 04_18_16
 
-#Purpose:Read in clean, formatted, uppercase lm transcript. Output language model created from the lm transcript.
+#Purpose:Read in clean, formatted, uppercase lm transcript. Output language model created from the lm transcript.  Does *not* take sentence-ends into consideration.
 #Command Line: ./Create_lm.sh [path/to/input/CLEAN_transcripts/file] [path/to/output/lm.arpabo/file]
 
 #Example Command Line: ./Create_lm.sh CLEAN_transcript.txt Output_lm.arpabo

@@ -19,7 +19,7 @@ import sys
 #sys.argv[1]= lexicon.txt
 #sys.argv[2]= CLEAN_transcript.txt
 #sys.argv[3]= output_transcript.txt
-#sys.argv[4]= output_unkown_words_list.txt
+#sys.argv[4]= output_unknown_words_list.txt
 
 #Reads in lexicon .txt file.
 f = open(sys.argv[1], "rb")
@@ -31,7 +31,7 @@ for line in f:
    line_split = line.split(" ")
    id = line_split[0]
    Words.append(id)
-f.close
+f.close()
 
 #For each word in the transcript, if it is NOT in the lexicon, then replace with XYZ. Write to an output.txt file.
 f = open(sys.argv[2], "rb")
@@ -51,6 +51,6 @@ for line in f:
     Unknown = " ".join(Unknown_words)
     f3.write(Sentence+"\n")
     f4.write(Unknown)
-f.close
-f3.close
-f4.close
+f.close()
+f3.close()
+f4.close()
