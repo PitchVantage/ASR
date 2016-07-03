@@ -2,7 +2,6 @@
 #/usr/local/bin
 #!/usr/bin/python
 
-import re, locale
 import sys
 from collections import Counter
 
