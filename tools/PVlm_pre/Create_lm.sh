@@ -16,7 +16,7 @@
 input=$1
 output=$2
 
-export IRSTLM=/Volumes/poo/ASR/tools/extras/irstlm
+export IRSTLM=/data/Github/ASR/tools/extras/irstlm
 export PATH=${PATH}:${IRSTLM}/bin
 
 
