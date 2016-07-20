@@ -8,6 +8,7 @@
 #Command Line: ./Create_lm_start_end.sh [path/to/input/CLEAN_transcripts/file] [path/to/output/lm.arpabo/file]
 
 #Example Command Line: ./Create_lm_start_end.sh CLEAN_transcript.txt Output_lm.arpabo
+#Example Command Line: ./Create_lm_start_end.sh CLEAN_transcript.txt Output_lm.arpabo
 
 #Command Line Variables:
 #$1= CLEAN_transcript.txt
