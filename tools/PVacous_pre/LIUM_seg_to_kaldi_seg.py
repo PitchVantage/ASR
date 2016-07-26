@@ -1,8 +1,12 @@
 import sys
 import ast
+import os
 
 # This script will take in a LIUM `.seg` file 
 # and output it in the form needed by `kaldi` for `segments` file
+
+# TODO currently does *not* identify the speaker in the segment file
+# TODO see how `swbd` transcripts do this before building
 
 # sys.argv[1] = <str>, full path to `.seg` file
 # sys.argv[2] = <str>, full path to output (`kaldi`) `segments` file
@@ -66,13 +70,15 @@ for line in f_in:
         # convert stop time to seconds
         stop *= .01
         # get  audio ID (without .wav)
-        audio_id = audio_file[:-4]
+        audio_id = os.path.basename(audio_file)
+        audio_id_no_ext = audio_id.split(".")[0]
         # create segment ID
         start_id = str(start).replace(".", "")
         stop_id = str(stop).replace(".", "")
         segment_id = "-".join((audio_id, start_id, stop_id))
         # build relevant line for `kaldi` segments file
-        kaldi_segment_line = (speaker_id, segment_id, start, stop)
+        # kaldi_segment_line = (speaker_id, segment_id, start, stop)
+        kaldi_segment_line = (segment_id, audio_id_no_ext, start, stop)
         if speaker_id not in speakers:
             # begin dictionary
             speakers[speaker_id] = {}
@@ -96,8 +102,6 @@ if interleave:
     for speaker in speakers:
         for seg in speakers[speaker]["segments"]:
             all_segments.append(seg)
-    for i in all_segments:
-        print(i)
     # sort all_segments
     # all_segments_sorted = all_segments.sort(key=lambda x: x[2])
     all_segments_sorted = sorted(all_segments, key=lambda x: x[2])
@@ -110,12 +114,12 @@ else:
         # convert floats to string and rebuild segment line
         seg_out = to_string(seg)
         f_out.write(seg_out + "\n")
-        for speaker in speakers:
-            if speaker != first:
-                for seg in speakers[speaker]["segments"]:
-                    # convert floats to string and rebuild segment line
-                    seg_out = to_string(seg)
-                    f_out.write(seg_out + "\n")
+    for speaker in speakers:
+        if speaker != first:
+            for seg in speakers[speaker]["segments"]:
+                # convert floats to string and rebuild segment line
+                seg_out = to_string(seg)
+                f_out.write(seg_out + "\n")
 
 f_out.close()
 
