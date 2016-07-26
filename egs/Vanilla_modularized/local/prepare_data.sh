@@ -130,8 +130,8 @@ for item in ${train_dir} ${test_dir}; do
             local/create_txt.pl ${transcripts} data/local/waves.test > data/test_dir/text
         fi
         # TODO what do these lines do?
-        cat data/test_dir/text | awk '{printf("%s %s\n", $1, $1);}' > data/test_dir/utt2spk
-#        cat data/test_dir/segments | awk '{printf("%s %s\n", $1, $1);}' > data/test_dir/utt2spk
+#        cat data/test_dir/text | awk '{printf("%s %s\n", $1, $1);}' > data/test_dir/utt2spk
+        cat data/test_dir/segments | awk '{printf("%s %s\n", $1, $1);}' > data/test_dir/utt2spk
         utils/utt2spk_to_spk2utt.pl <data/test_dir/utt2spk >data/test_dir/spk2utt
     fi
 
