@@ -19,6 +19,7 @@ Below are the subfolders for `tools/`:
 | --- | --- | --- | --- | --- |
 | *PVmisc* | *sample.py* | *a few words to describe the file* | *y* |
 | | | | | <!--- keeps a blank line between folder types -->
+| PVacous_pre | LIUM_seg_to_kaldi_seg.py | converts `.seg` file from LIUM `.jar` to `kaldi` format | y |
 | PVacous_pre | sphere_to_wav.sh | converts `.sph` to `.wav` using `sph2pipe` | y |
 | | | | | <!--- keeps a blank line between folder types -->
 | PVanalysis | callGoVivace.sh | transcribes single audio file with `goVivace` | y |
