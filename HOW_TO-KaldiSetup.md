@@ -18,14 +18,15 @@ INSTALL DEPENDENCIES
 1. go to /tools and open INSTALL
 
     - ```extras/check_dependencies.sh```
-    - do what it says
+    - It will identify any dependencies that are uninstalled
+        - Note: These can all be installed via `homebrew` if on `Mac OS`
     - ```make -j 4```		*for multi-cores
-	OR
-	```make```			*for one core
+	    - ```make```			*for one core
 
 2. go to /src and open INSTALL
 
     - ```./configure```
+        - ```/configure --shared``` must be used if interested in using `python` [file viewer](https://github.com/janchorowski/kaldi-python)
     - ```make depend -j 4```		*for multi-cores
     - ```make -j 4```
 
