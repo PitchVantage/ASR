@@ -110,9 +110,8 @@ for item in ${train_dir} ${test_dir}; do
         else
             local/create_txt.pl ${transcripts} data/local/waves.train > data/train_dir/text
         fi
-        # TODO what do these lines do?
+        # create `utt2spk` and `spk2utt` files based on `transcripts`
         cat data/train_dir/text | awk '{printf("%s %s\n", $1, $1);}' > data/train_dir/utt2spk
-#        cat data/train_dir/segments | awk '{printf("%s %s\n", $1, $1);}' > data/train_dir/utt2spk
         utils/utt2spk_to_spk2utt.pl <data/train_dir/utt2spk >data/train_dir/spk2utt
     elif [[ ${item} == ${test_dir} ]]; then
         # make a data/test_dir directory
@@ -129,10 +128,16 @@ for item in ${train_dir} ${test_dir}; do
         else
             local/create_txt.pl ${transcripts} data/local/waves.test > data/test_dir/text
         fi
-        # TODO what do these lines do?
-#        cat data/test_dir/text | awk '{printf("%s %s\n", $1, $1);}' > data/test_dir/utt2spk
-        cat data/test_dir/segments | awk '{printf("%s %s\n", $1, $1);}' > data/test_dir/utt2spk
-        utils/utt2spk_to_spk2utt.pl <data/test_dir/utt2spk >data/test_dir/spk2utt
+        if [ "${segmented}" = true ]; then
+            # create `utt2spk` and `spk2utt` files based on `segments` (in case `transcripts` doesn't exist)
+            cat data/test_dir/segments | awk '{printf("%s %s\n", $1, $1);}' > data/test_dir/utt2spk
+            utils/utt2spk_to_spk2utt.pl <data/test_dir/utt2spk >data/test_dir/spk2utt
+        else
+            # create `utt2spk` and `spk2utt` files based on `wav.scp`
+            # (since `segments` doesn't exist and in case `transcripts` doesn't exist)
+            cat data/test_dir/wav.scp | awk '{printf("%s %s\n", $1, $1);}' > data/test_dir/utt2spk
+            utils/utt2spk_to_spk2utt.pl <data/test_dir/utt2spk >data/test_dir/spk2utt
+        fi
     fi
 
 done
