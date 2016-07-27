@@ -41,9 +41,10 @@ Below are the subfolders for `tools/`:
 | PVlm_pre | cleanCOCA.py | prepares original COCA corpus for use in language model | y |
 | PVlm_pre | cleanAllTEDLIUM.sh | runs `cleanTEDLIUM.py` on entire folder of `.stm` files (for lm or trans) | y |
 | PVlm_pre | cleanTEDLIUM.py | prepares single `TEDLIUM` transcript file for use (in lm or for transcripts)| y |
-| PVlm_pre | Create_lm.sh | creates a trigram lm from a cleaned lm transcript| y |
-| PVlm_pre | Create_lm_start_end.sh | creates a trigram lm from a cleaned lm transcript with start and end markers| y |
-| PVlm_pre | Format_Transcript_for_LM.py | prepares a single transcript file for use in lm | y |
+| PVlm_pre | create_lm.sh | creates an `ARPA`-style language model from a list of `.txt` files | y |
+| PVlm_pre | find_not_in_lexicon_arpa.py | creates a list of OOV words in a given LM not in a given lexicon | y | 
+| PVlm_pre | find_not_in_lexicon_text.py | creates a list of OOV words in a given LM not in a given list of `.txt` files | y | 
+| PVlm_pre | preprocess_for_lm.py | pre-processes a list of `.txt` files for us in building a language model | y |
 | PVlm_pre | prune_lm.sh | prunes an existing language model by removing "unnecessary" n-grams| y |
 | PVlm_pre | Replace_w_XYZ.py | replaces words not in the lexicon with XYZ for a single lm transcript file | y |
 | PVlm_pre | Replace_w_XYZ_and_list_of_unknown_words.py | replaces words not in the lexicon with XYZ for a single lm transcript file and keeps a list of all words replaced with XYZ | y |
