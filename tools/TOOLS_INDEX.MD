@@ -31,6 +31,7 @@ Below are the subfolders for `tools/`:
 | PVanalysis | findPercentNE.py | attempts to identify (coarsely) the percent of named entities in a file | y |
 | PVanalysis | makeDataFrame.py | makes a `pandas` dataframe out of a `.results` file | y |
 | PVanalysis | NE-rate.py | *rough* attempt to estimate ASR success on named entities | y |
+| PVanalysis | visualize_errors.py | generates `.html` output with errors color-coded | y |
 | | | | | <!--- keeps a blank line between folder types -->
 | PVlexicon_pre | mergeLexicons.py | merges two lexicon files into one | y |
 | PVlexicon_pre | mergePhones.py | merges two phones files into one | y |
