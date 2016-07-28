@@ -1,12 +1,19 @@
 import sys
 import re
 
-#merges two lexicons together
-#NOTE:  They **must both** be sorted alphabetically already!
+# This script merges two lexicons together
+# NOTE:  They **must both** be sorted alphabetically already!
 
-#sys.argv[1] = full path to location for merged output lexicon
-#sys.argv[2] = lexicon one
-#sys.argv[3] = lexicon two
+# TODO: Still may result in duplicate dictionary entries - to fix will require keeping history of previous entry
+"""
+CAT CA T
+CAT(2) CA TT
+CAT(2) CAA T
+"""
+
+# sys.argv[1] = full path to location for merged output lexicon
+# sys.argv[2] = lexicon one
+# sys.argv[3] = lexicon two
 
 #open file for outputing new lexicon
 fOut = open(sys.argv[1], "wb")
@@ -86,6 +93,7 @@ while l1 in range(len(lex_master)) and l2 in range(len(lex_minor)):
     #extract multiple pronunciation key if present
     if re.match(reg, word_master):
         match = re.match(reg, word_master)
+        print("master from regex", match.group(2))
         word_master = match.group(1)
         key_master = int(match.group(2))
     #current lex_minor word
@@ -99,10 +107,12 @@ while l1 in range(len(lex_master)) and l2 in range(len(lex_minor)):
         match = re.match(reg, word_minor)
         word_minor = match.group(1)
         key_minor = int(match.group(2))
+    print("master", key_master)
+    print("minor", key_minor)
     #conditions
     #if exact same word, add only once
     if word_master == word_minor and trans_master == trans_minor:
-        print("adding word from master", word_master)
+        print("adding word from master", word_master, trans_master)
         #write to file
         #to ensure no duplicate writing to file
         if trans_master != lastTrans:
@@ -110,13 +120,13 @@ while l1 in range(len(lex_master)) and l2 in range(len(lex_minor)):
                 fOut.write(word_master + " " + " ".join(trans_master) + "\n")
             else:
                 fOut.write(word_master + "(" + str(key_master) + ") " + " ".join(trans_master) + "\n")
-            #update both counters
+        #update both counters
         l1 += 1
         l2 += 1
         #update lastTrans
         lastTrans = trans_master
     elif word_master == word_minor and trans_master != trans_minor:
-        print("adding word from master", word_master)
+        print("adding word from master", word_master, trans_master)
         #write to file
         #to ensure no duplicate writing to file
         if trans_master != lastTrans:
@@ -124,7 +134,7 @@ while l1 in range(len(lex_master)) and l2 in range(len(lex_minor)):
                 fOut.write(word_master + " " + " ".join(trans_master) + "\n")
             else:
                 fOut.write(word_master + "(" + str(key_master) + ") " + " ".join(trans_master) + "\n")
-            print("adding word from minor with additional pronunciation", word_minor)
+            print("adding word from minor with additional pronunciation", word_minor, trans_minor)
             fOut.write(word_minor + "(" + str(key_master + 1) + ") " + " ".join(trans_minor) + "\n")
         #update both counters
         l1 += 1
@@ -134,7 +144,7 @@ while l1 in range(len(lex_master)) and l2 in range(len(lex_minor)):
     else:
         #if word_master comes before word minor, add word_master
         if word_master < word_minor:
-            print("adding word from master", word_master)
+            print("adding word from master", word_master, trans_master)
             #write to file
             #to ensure no duplicate writing to file
             if trans_master != lastTrans:
@@ -177,7 +187,7 @@ while l1 in range(len(lex_master)):
         match = re.match(reg, word_master)
         word_master = match.group(1)
         key_master = int(match.group(2))
-    print("adding word from master", word_master)
+    print("adding word from master", word_master, trans_master)
     #write to file
     #to ensure no duplicate writing to file
     if trans_master != lastTrans:
