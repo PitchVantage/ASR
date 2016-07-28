@@ -33,8 +33,9 @@ Below are the subfolders for `tools/`:
 | PVanalysis | NE-rate.py | *rough* attempt to estimate ASR success on named entities | y |
 | PVanalysis | visualize_errors.py | generates `.html` output with errors color-coded | y |
 | | | | | <!--- keeps a blank line between folder types -->
-| PVlexicon_pre | mergeLexicons.py | merges two lexicon files into one | y |
-| PVlexicon_pre | mergePhones.py | merges two phones files into one | y |
+| PVlexicon_pre | check_phones_in_lexicon.py | ensures that all `phones` are in `lexicon` | y |
+| PVlexicon_pre | merge_lexicons.py | merges two lexicon files into one | y |
+| PVlexicon_pre | merge_phones.py | merges two phones files into one | y |
 | PVlexicon_pre | UpperCase_Dict.py | changes a lexicon.txt file into uppercase format| y |
 | PVlexicon_pre | Remove_Duplicates.py | remove duplicates from input file | y |
 | | | | | <!--- keeps a blank line between folder types -->
