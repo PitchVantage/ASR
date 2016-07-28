@@ -19,11 +19,14 @@ for line in f:
     #split on whitespace
     if "\t" in line:
         split = line.rstrip().split("\t")
+        #capture word and transcription
+        word = split[0]
+        trans = split[1].split(" ")
     else:
         split = line.rstrip().split(" ")
-    #capture word and transcription
-    word = split[0]
-    trans = split[1:]
+        #capture word and transcription
+        word = split[0]
+        trans = split[1:]
     #add to dictionary
     lex_1.append((word, trans))
 f.close()
