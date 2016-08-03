@@ -46,7 +46,7 @@ steps/train_mono.sh --nj ${num_processors} \
     data/train_dir \
     data/lang \
     exp/monophones \
-    || printf "\n####\n#### ERROR: train_mono.sh \n####\n\n";
+    || (printf "\n####\n#### ERROR: train_mono.sh \n####\n\n" && exit 1);
 
 printf "Timestamp in HH:MM:SS (24 hour format)\n";
 date +%T
@@ -61,14 +61,13 @@ steps/align_si.sh --nj ${num_processors} \
     data/lang \
     exp/monophones \
     exp/monophones_aligned \
-    || printf "\n####\n#### ERROR: align_si.sh \n####\n\n";
+    || (printf "\n####\n#### ERROR: align_si.sh \n####\n\n" && exit 1);
 
 printf "Timestamp in HH:MM:SS (24 hour format)\n";
 date +%T
 printf "\n"
 
 # Train tri1, which is deltas + delta-deltas, on train data.
-# TODO why don't we do anything with data/test_dir????
 
 # removed --cmd in original `run`, sticking with default
 steps/train_deltas.sh \
@@ -78,7 +77,7 @@ steps/train_deltas.sh \
     data/lang \
     exp/monophones_aligned \
     exp/triphones \
-    || printf "\n####\n#### ERROR: train_deltas.sh \n####\n\n";
+    || (printf "\n####\n#### ERROR: train_deltas.sh \n####\n\n" && exit 1);
 
 printf "Timestamp in HH:MM:SS (24 hour format)\n";
 date +%T

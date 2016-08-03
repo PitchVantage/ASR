@@ -48,17 +48,20 @@ while getopts "r:ux:y:p:l:n:t:g:h:" opt; do
             test_dir=${OPTARG}
             ;;
         g)
-            segmentsTRAIN=${OPTARG}
+            segments_train=${OPTARG}
             ;;
         h)
-            segmentsTEST=${OPTARG}
+            segments_test=${OPTARG}
             ;;
         \?)
-            echo "Please use flag -n and/or -t"
+            echo "Please use correct flags"
             exit 1
             ;;
     esac
 done
+
+# remove any existing folders
+rm -rf data/ mfcc/ exp/
 
 printf "Timestamp in HH:MM:SS (24 hour format)\n";
 date +%T
@@ -68,51 +71,59 @@ printf "\n"
 if [[ ${train_dir} != "" && ${test_dir} != "" ]]; then
     if [ "${segmented}" = true ]; then
         local/prepare_data.sh -r ${transcripts} -x ${lexicon} -y ${lexicon_nosil} -p ${phones} \
-            -l ${language_model} -n ${train_dir} -t ${test_dir} -g ${segmentsTRAIN} -h ${segmentsTEST} \
-            || printf "\n####\n#### ERROR: prepare_data.sh\n####\n\n";
-        utils/fix_data_dir.sh data/train_dir
-        utils/fix_data_dir.sh data/test_dir
+            -l ${language_model} -n ${train_dir} -t ${test_dir} -g ${segments_train} -h ${segments_test} \
+            || (printf "\n####\n#### ERROR: prepare_data.sh\n####\n\n" && exit 1);
+        utils/fix_data_dir.sh data/train_dir \
+            || (printf "\n####\n#### ERROR: fix_data_dir.sh\n####\n\n" && exit 1);
+        utils/fix_data_dir.sh data/test_dir \
+            || (printf "\n####\n#### ERROR: fix_data_dir.sh\n####\n\n" && exit 1);
     else
         local/prepare_data.sh -r ${transcripts} -x ${lexicon} -y ${lexicon_nosil} \
         -p ${phones} -l ${language_model} -n ${train_dir} -t ${test_dir} -u \
-        || printf "\n####\n#### ERROR: prepare_data.sh\n####\n\n";
+        || (printf "\n####\n#### ERROR: prepare_data.sh\n####\n\n" && exit 1);
     fi
 elif [[ ${train_dir} != "" && ${test_dir} == "" ]]; then
     if [ "${segmented}" = true ]; then
         local/prepare_data.sh -r ${transcripts} -x ${lexicon} -y ${lexicon_nosil} -p ${phones} \
-            -l ${language_model} -n ${train_dir} -g ${segmentsTRAIN} \
-            || printf "\n####\n#### ERROR: prepare_data.sh\n####\n\n";
-        utils/fix_data_dir.sh data/train_dir
+            -l ${language_model} -n ${train_dir} -g ${segments_train} \
+            || (printf "\n####\n#### ERROR: prepare_data.sh\n####\n\n" && exit 1);
+        utils/fix_data_dir.sh data/train_dir \
+            || (printf "\n####\n#### ERROR: fix_data_dir.sh\n####\n\n" && exit 1);
     else
         local/prepare_data.sh -r ${transcripts} -x ${lexicon} -y ${lexicon_nosil} -p ${phones} \
             -l ${language_model} -n ${train_dir} -u \
-            || printf "\n####\n#### ERROR: prepare_data.sh\n####\n\n";
+            || (printf "\n####\n#### ERROR: prepare_data.sh\n####\n\n" && exit 1);
     fi
 elif [[ ${test_dir} != "" && ${train_dir} == "" ]]; then
     if [ "${segmented}" = true ]; then
         local/prepare_data.sh -r ${transcripts} -x ${lexicon} -y ${lexicon_nosil} -p ${phones} \
-            -l ${language_model} -t ${test_dir} -h ${segmentsTEST}\
-            || printf "\n####\n#### ERROR: prepare_data.sh\n####\n\n";
-        utils/fix_data_dir.sh data/test_dir
+            -l ${language_model} -t ${test_dir} -h ${segments_test}\
+            || (printf "\n####\n#### ERROR: prepare_data.sh\n####\n\n" && exit 1);
+        utils/fix_data_dir.sh data/test_dir \
+            || (printf "\n####\n#### ERROR: fix_data_dir.sh\n####\n\n" && exit 1);
     else
         local/prepare_data.sh -r ${transcripts} -x ${lexicon} -y ${lexicon_nosil} -p ${phones} \
             -l ${language_model} -t ${test_dir} -u \
-            || printf "\n####\n#### ERROR: prepare_data.sh\n####\n\n";
+            || (printf "\n####\n#### ERROR: prepare_data.sh\n####\n\n" && exit 1);
     fi
+else
+    printf "\n####\n#### ERROR: Neither training nor testing data provided\n####\n\n" && exit 1
 fi
 
 # run utils/prepare_lang.sh
-utils/prepare_lang.sh --position-dependent-phones false \
+utils/prepare_lang.sh \
+    --position-dependent-phones false \
     data/local/dict \
     "<unk>" \
     data/local/lang \
     data/lang \
-    || printf "\n####\n#### ERROR: prepare_lang.sh\n####\n\n";
+    || (printf "\n####\n#### ERROR: prepare_lang.sh\n####\n\n" && exit 1);
 
 # run local/prepare_lm.sh
 # creates `data/lang_test_tg
-local/prepare_lm.sh -l ${language_model} \
-    || printf "\n####\n#### ERROR: prepare_lm.sh\n####\n\n";
+local/prepare_lm.sh \
+    -l ${language_model} \
+    || (printf "\n####\n#### ERROR: prepare_lm.sh\n####\n\n" && exit 1);
 
 
 printf "Timestamp in HH:MM:SS (24 hour format)\n";

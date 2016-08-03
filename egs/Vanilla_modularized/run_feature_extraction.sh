@@ -45,13 +45,13 @@ for dir in ${train_dir} ${test_dir}; do
         data/${dir} \
         exp/make_mfcc/${dir} \
         mfcc \
-        || printf "\n####\n#### ERROR: make_mfcc.sh \n####\n\n";
+        || (printf "\n####\n#### ERROR: make_mfcc.sh \n####\n\n" && exit 1);
 
     steps/compute_cmvn_stats.sh \
         data/${dir} \
         exp/make_mfcc/${dir} \
         mfcc \
-        || printf "\n####\n#### ERROR: compute_cmvn_stats.sh \n####\n\n";
+        || (printf "\n####\n#### ERROR: compute_cmvn_stats.sh \n####\n\n" && exit 1);
 done
 
 printf "Timestamp in HH:MM:SS (24 hour format)\n";
