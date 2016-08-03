@@ -34,6 +34,7 @@ Below are the subfolders for `tools/`:
 | PVanalysis | visualize_errors.py | generates `.html` output with errors color-coded | y |
 | | | | | <!--- keeps a blank line between folder types -->
 | PVlexicon_pre | check_phones_in_lexicon.py | ensures that all `phones` are in `lexicon` | y |
+| PVlexicon_pre | make_lexicon_nosil.sh | makes a `lexicon_nosil` from an existing `lexicon` | y |
 | PVlexicon_pre | merge_lexicons.py | merges two lexicon files into one | y |
 | PVlexicon_pre | merge_phones.py | merges two phones files into one | y |
 | PVlexicon_pre | UpperCase_Dict.py | changes a lexicon.txt file into uppercase format| y |

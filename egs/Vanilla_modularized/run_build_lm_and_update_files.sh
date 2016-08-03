@@ -87,7 +87,7 @@ for f in "${files_in[@]}"; do
     file_path=${temp}${file_counter}.txt
     # add to array of clean files
     clean_files+=(${file_path})
-    python ../../tools/nextiva_tools/lm_pre/preprocess_for_lm.py \
+    python ../../tools/PVlm_pre/preprocess_for_lm.py \
         ${f} \
         ${file_path} \
         ${contractions} \
@@ -106,25 +106,25 @@ echo "Building language model from cleaned .txt files"
 echo "Saving to" ${folder_out}"lm.arpa"
 
 if [ "${segment}" = true ] && [ "${compress}" = true ]; then
-    ../../tools/nextiva_tools/lm_pre/create_lm.sh \
+    ../../tools/PVlm_pre/create_lm.sh \
         -m ${irstlm_path} \
         -o ${folder_out}lm.arpa \
         -s \
         -c \
         -i "${clean_files_list}"
 elif [ "${segment}" = false ] && [ "${compress}" = false ]; then
-    ../../tools/nextiva_tools/lm_pre/create_lm.sh \
+    ../../tools/PVlm_pre/create_lm.sh \
         -m ${irstlm_path} \
         -o ${folder_out}lm.arpa \
         -i "${clean_files_list}"
 elif [ "${segment}" = true ] && [ "${compress}" = false ]; then
-    ../../tools/nextiva_tools/lm_pre/create_lm.sh \
+    ../../tools/PVlm_pre/create_lm.sh \
         -m ${irstlm_path} \
         -o ${folder_out}lm.arpa \
         -s \
         -i "${clean_files_list}"
 else
-    ../../tools/nextiva_tools/lm_pre/create_lm.sh \
+    ../../tools/PVlm_pre/create_lm.sh \
         -m ${irstlm_path} \
         -o ${folder_out}lm.arpa \
         -i "${clean_files_list}"
@@ -139,13 +139,13 @@ printf "\n"
 echo "Comparing language model to lexicon"
 
 if [ "${compress}" = true ]; then
-    python ../../tools/nextiva_tools/lm_pre/find_not_in_lexicon_arpa.py \
+    python ../../tools/PVlm_pre/find_not_in_lexicon_arpa.py \
         ${folder_out}lm.arpa \
         True \
         ${lexicon} \
         ${temp}oov.txt
 else
-    python ../../tools/nextiva_tools/lm_pre/find_not_in_lexicon_arpa.py \
+    python ../../tools/PVlm_pre/find_not_in_lexicon_arpa.py \
         ${folder_out}lm.arpa \
         False \
         ${lexicon} \
@@ -160,20 +160,20 @@ else
     echo "Out-of-vocabulary words found in language model have been written to" ${temp}oov.txt
     # TODO send ${temp}oov.txt to phonemic transcriber
     echo "Building a new lexicon"
-    python ../../tools/nextiva_tools/lm_pre/merge_lexicons.py \
+    python ../../tools/PVlm_pre/merge_lexicons.py \
         ${folder_out}lexicon.txt \
         ${lexicon} \
         # TODO put output of phonemic transcriber here
 fi
 
 echo "Updating phones list"
-python ../../tools/nextiva_tools/lm_pre/check_phones_in_lexicon.py \
+python ../../tools/PVlm_pre/check_phones_in_lexicon.py \
     ${folder_out}lexicon.txt \
     ${phones} \
     ${folder_out}phones.txt
 
 echo "Building lexicon_nosil"
-../../tools/nextiva_tools/lexicon_pre/make_lexicon_nosil.sh ${folder_out}lexicon.txt ${folder_out}lexicon_nosil.txt
+../../tools/PVlexicon_pre/make_lexicon_nosil.sh ${folder_out}lexicon.txt ${folder_out}lexicon_nosil.txt
 
 # removing temp folder
 rm -rf ${temp}

@@ -93,13 +93,13 @@ if [ "${segmented}" = true ]; then
 # if audio is to be *segmented*
     # run diarization
     # TODO how to limit to 2 speakers? `--cMinimumOfCluster` isn't working
-    java -Xmx1g -jar ../../tools/nextiva_tools/acoustic_pre/LIUM_SpkDiarization-8.4.1.jar \
+    java -Xmx1g -jar ../../tools/PVacoustic_pre/LIUM_SpkDiarization-8.4.1.jar \
         --fInputMask=${audio_path} \
         --sOutputMask=${temp}data/segments_raw.seg \
         --cMinimumOfCluster=2 \
         --doCEClustering ${audio_path}
     # format transcripts file
-    python ../../tools/nextiva_tools/acoustic_pre/LIUM_seg_to_kaldi_seg.py \
+    python ../../tools/PVacoustic_pre/LIUM_seg_to_kaldi_seg.py \
         ${temp}data/segments_raw.seg \
         ${temp}data/segments \
         True
