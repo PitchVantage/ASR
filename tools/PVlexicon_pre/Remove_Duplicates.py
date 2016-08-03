@@ -1,7 +1,3 @@
-#!/usr/bin/env python
-#/usr/local/bin
-#!/usr/bin/python
-
 import re, locale
 import sys
 
@@ -25,14 +21,14 @@ f = open(sys.argv[1], "rb")
 Words=[]
 for line in f:
    Words.append(line)
-f.close
+f.close()
 
 Good=list(set(Words))
 
 f2= open(sys.argv[2], "wb")
 for j in Good:
     f2.write(j)
-f2.close
+f2.close()
 
 
 
