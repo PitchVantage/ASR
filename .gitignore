@@ -115,3 +115,5 @@ GSYMS
 /tools/mpg123-1.21.0
 /tools/sequitur
 /tools/srilm.tgz
+.idea/
+src/lib/
