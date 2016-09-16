@@ -49,22 +49,57 @@ seg_in = sys.argv[1]
 seg_out = sys.argv[2]
 interleave = ast.literal_eval(sys.argv[3])
 
+##############################
 
-def to_string(tup):
-    return " ".join([tup[0], tup[1], str(tup[2]), str(tup[3])])
+
+# converts tuple to string
+# num_digits = max number of digits in original frames
+# needed to keep order after sort
+def to_string(tup, num_digits):
+    return " ".join([tup[0], tup[1], add_leading_zeros(tup[2], num_digits), add_leading_zeros(
+        tup[3], num_digits)])
+
+
+# adds leading zeros to an int and returns a string
+def add_leading_zeros(number, num_digits):
+    num_as_string = str(number)
+    string_length = len(num_as_string) - 1  # so as not to count decimal
+    if string_length < num_digits:
+        zeros_to_add = num_digits - string_length
+        return "0" * zeros_to_add + num_as_string
+    else:
+        return num_as_string
+
+##############################
 
 f_in = open(seg_in, "r")
 
 # dictionary to hold speaker ID, gender, and segments
 speakers = {}
 
+# determine maximum number of digits in timestamps
+# needed for maintaining order after sorting
+num_digits = 0
+
+for line in f_in:
+    if not line.startswith(";;"):
+        time_stamp = line.split(" ")[2]
+        num_digits = len(str(time_stamp))
+f_in.close()
+
+
 # iterate through each line of original file
+f_in = open(seg_in, "r")
+
 for line in f_in:
     # skip lines with cluster (speaker) information
     if not line.startswith(";;"):
         audio_file, _, start, length, gender, _, _, speaker_id = line.rstrip().split(" ")
         start = int(start)
         stop = start + int(length)
+        # keep start and stop as strings
+        start_frames = start
+        stop_frames = stop
         # convert start time to seconds
         start *= .01
         # convert stop time to seconds
@@ -73,8 +108,8 @@ for line in f_in:
         audio_id = os.path.basename(audio_file)
         audio_id_no_ext = audio_id.split(".")[0]
         # create segment ID
-        start_id = str(start).replace(".", "")
-        stop_id = str(stop).replace(".", "")
+        start_id = add_leading_zeros(start_frames, num_digits)
+        stop_id = add_leading_zeros(stop_frames, num_digits)
         segment_id = "-".join((audio_id, start_id, stop_id))
         # build relevant line for `kaldi` segments file
         # kaldi_segment_line = (speaker_id, segment_id, start, stop)
@@ -107,18 +142,18 @@ if interleave:
     all_segments_sorted = sorted(all_segments, key=lambda x: x[2])
     for seg in all_segments_sorted:
         # convert floats to string and rebuild segment line
-        seg_out = to_string(seg)
+        seg_out = to_string(seg, num_digits)
         f_out.write(seg_out + "\n")
 else:
     for seg in speakers[first]["segments"]:
         # convert floats to string and rebuild segment line
-        seg_out = to_string(seg)
+        seg_out = to_string(seg, num_digits)
         f_out.write(seg_out + "\n")
     for speaker in speakers:
         if speaker != first:
             for seg in speakers[speaker]["segments"]:
                 # convert floats to string and rebuild segment line
-                seg_out = to_string(seg)
+                seg_out = to_string(seg, num_digits)
                 f_out.write(seg_out + "\n")
 
 f_out.close()

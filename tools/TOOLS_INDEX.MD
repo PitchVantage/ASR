@@ -33,17 +33,20 @@ Below are the subfolders for `tools/`:
 | PVanalysis | NE-rate.py | *rough* attempt to estimate ASR success on named entities | y |
 | PVanalysis | visualize_errors.py | generates `.html` output with errors color-coded | y |
 | | | | | <!--- keeps a blank line between folder types -->
-| PVlexicon_pre | mergeLexicons.py | merges two lexicon files into one | y |
-| PVlexicon_pre | mergePhones.py | merges two phones files into one | y |
+| PVlexicon_pre | check_phones_in_lexicon.py | ensures that all `phones` are in `lexicon` | y |
+| PVlexicon_pre | make_lexicon_nosil.sh | makes a `lexicon_nosil` from an existing `lexicon` | y |
+| PVlexicon_pre | merge_lexicons.py | merges two lexicon files into one | y |
+| PVlexicon_pre | merge_phones.py | merges two phones files into one | y |
 | PVlexicon_pre | UpperCase_Dict.py | changes a lexicon.txt file into uppercase format| y |
 | PVlexicon_pre | Remove_Duplicates.py | remove duplicates from input file | y |
 | | | | | <!--- keeps a blank line between folder types -->
 | PVlm_pre | cleanCOCA.py | prepares original COCA corpus for use in language model | y |
 | PVlm_pre | cleanAllTEDLIUM.sh | runs `cleanTEDLIUM.py` on entire folder of `.stm` files (for lm or trans) | y |
 | PVlm_pre | cleanTEDLIUM.py | prepares single `TEDLIUM` transcript file for use (in lm or for transcripts)| y |
-| PVlm_pre | Create_lm.sh | creates a trigram lm from a cleaned lm transcript| y |
-| PVlm_pre | Create_lm_start_end.sh | creates a trigram lm from a cleaned lm transcript with start and end markers| y |
-| PVlm_pre | Format_Transcript_for_LM.py | prepares a single transcript file for use in lm | y |
+| PVlm_pre | create_lm.sh | creates an `ARPA`-style language model from a list of `.txt` files | y |
+| PVlm_pre | find_not_in_lexicon_arpa.py | creates a list of OOV words in a given LM not in a given lexicon | y | 
+| PVlm_pre | find_not_in_lexicon_text.py | creates a list of OOV words in a given LM not in a given list of `.txt` files | y | 
+| PVlm_pre | preprocess_for_lm.py | pre-processes a list of `.txt` files for us in building a language model | y |
 | PVlm_pre | prune_lm.sh | prunes an existing language model by removing "unnecessary" n-grams| y |
 | PVlm_pre | Replace_w_XYZ.py | replaces words not in the lexicon with XYZ for a single lm transcript file | y |
 | PVlm_pre | Replace_w_XYZ_and_list_of_unknown_words.py | replaces words not in the lexicon with XYZ for a single lm transcript file and keeps a list of all words replaced with XYZ | y |

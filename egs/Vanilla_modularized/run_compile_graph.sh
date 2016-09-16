@@ -15,7 +15,7 @@ utils/mkgraph.sh \
     data/lang_test_tg \
     exp/triphones \
     exp/triphones/graph \
-    || printf "\n####\n#### ERROR: mkgraph.sh \n####\n\n";
+    || (printf "\n####\n#### ERROR: mkgraph.sh \n####\n\n" && exit 1);
 
 printf "Timestamp in HH:MM:SS (24 hour format)\n";
 date +%T
