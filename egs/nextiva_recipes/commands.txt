@@ -1,0 +1,9 @@
+./run_prepare_data.sh -r /data/kaldi/Input_Parameters/transcripts/with_XYZ_v2/TEDLIUM_release1_segmented_transcripts_XYZ_v2 -x /data/kaldi/Input_Parameters/lexicon/lexicon_v2.txt -y /data/kaldi/Input_Parameters/lexicon_nosil/lexicon_nosil_v2.txt -p /data/kaldi/Input_Parameters/phones/phones_v2.txt -l /data/kaldi/Input_Parameters/language_model/v2/Seg_COCA_WSJ_v2.arpabo -n /data/kaldi/acoustic_data/TED_Train/ -t /data/kaldi/PV_Test_Folders/TED_Test/TED_audio/ -g /data/kaldi/Input_Parameters/segments/TEDLIUM_release1_segmentsTRAIN -h /data/kaldi/Input_Parameters/segments/TEDLIUM_release1_segmentsTEST
+
+./run_feature_extraction.sh -j 8 -n -t -c conf/mfcc.conf
+
+./run_train_phones.sh -i lda_mllt -j 8 -g 10000 -p 10 -q "--boost_silence 1.25" -r "--boost_silence 1.25" -s "--boost_silence 1.25" -t "--boost_silence 1.25" -u "--boost_silence 1.25" -v "--boost_silence 1.25" -w "--boost_silence 1.25" -x "--boost_silence 1.25"
+
+./run_compile_graph.sh -t exp/triphones_lda_aligned/
+
+./run_test.sh -j 8 -d exp/triphones_lda_aligned/decode_test_dir

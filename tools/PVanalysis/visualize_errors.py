@@ -1,7 +1,5 @@
 import re
 import sys
-from nltk.corpus import wordnet
-import math
 
 # Given a gold transcript file and a `best path` file from `kaldi`, this script will
 # generate an `html` output color-coding the errors made by the prediction
@@ -12,135 +10,126 @@ import math
 # sys.argv[2] = full path to `best path` file (`exp/triphones/decode_test_dir/scoring/log/best_path.9.log`)
 # sys.argv[3] = full path to output `html` file
 
+try:
+    goldAddr = sys.argv[1]
+    guessAddr = sys.argv[2]
+    destAddr = sys.argv[3]
+except:
+    print("GOT: "+str(sys.argv))
+    print("USAGE: arg1=goldTranscript, arg2=guessTranscript, arg3=destination")
+    sys.exit()
 
-gold = sys.argv[1]
-guess = sys.argv[2]
-html = sys.argv[3]
 
-counter = 0
-guessLines = []
-goldLines = []
-allGoldWords = {}
 seenLOG = False
 
-def howSignificant(word):
-    syn = wordnet.synsets(word)
-    result = 0
-    if len(syn)<1:
-        result += 4
-    result += len(word)/2
-    repetitions = allGoldWords[word]
-    result -= math.sqrt(repetitions)
-    result += 5
-    return result
-#################################################################################
-
-with open(guess) as f:
+#Read the two files
+guessWords = []
+goldWords = []
+lineCounter = 0
+with open(guessAddr) as f:
     for line in f:
-        if line[:3] != 'LOG' and seenLOG and line[0]!='#' and len(line.strip())>10:
+        lineCounter += 1
+        if True:#line[:3] != 'LOG' and seenLOG and line[0]!='#' and len(line.strip())>10:
             line = re.sub('\d[^ ]* ','',line)
+            line = re.sub('-','',line)
+            line = re.sub('^\\w+_\\w+ ','',line)
             line = re.sub('(XYZ )+','XYZ ',line)
-            guessLines.append(line)
-            counter+=1
+            if line[:10]=='LOG (latti':
+                continue
+            line = re.sub('^.*\\_\\d+ ','',line)
+            for word in line.split():
+                word = re.sub('.*_','',word)
+                guessWords.append(word.upper())
         elif line[:3] == 'LOG':
-            seenLOG = True
-            
-with open(gold) as f:
+            seenLOG = True           
+#         if lineCounter%50==0:
+#             print(lineCounter)
+with open(goldAddr) as f:
     for line in f:
         line = re.sub('\d[^ ]* ','',line)
         line = re.sub('(XYZ )+','XYZ ',line)
-        goldLines.append(line)
         for word in line.split():
-                if word in allGoldWords:
-                    allGoldWords[word] += 1
-                else:
-                    allGoldWords[word] = 1
+            word = re.sub('.*_','',word)
+            goldWords.append(word)
     
-result = "<html><head><title>Transcription evaluation</title></head><body style='margin: 40px;'>"
+print('finished reading')
+print('size: '+str(len(goldWords)))
+print('size: '+str(len(guessWords)))
+#Create Dynamic programming table
+dpTable = []
+path = []
+for i in range(len(goldWords)+1):
+    row = []
+    pathRow = []
+    for j in range(len(guessWords)+1):
+        pathRow.append(0)
+        if i==0:
+            row.append(j)
+        elif j==0:
+            row.append(i)
+        else:
+            row.append(10000)
+    dpTable.append(row)
+    path.append(pathRow)
 
-xyzcounter = 0
-errorWordCounter = 0
-#Now compare the two texts:        
-for i in range(counter):
-    #print(guessLines[i])
-    #print(goldLines[i])
-    guess = guessLines[i].split()
-    gold = goldLines[i].split()
-    correct = []
-    lastCorrectIndex = -1
-    printMode = False
-    for j in range(len(guess)):
-        word = guess[j]
-        if word=='XYZ':
-            xyzcounter += 1;
-        for k in range(lastCorrectIndex+1,lastCorrectIndex+100):
-            if k<len(gold):
-                candidate = gold[k]
-                ###
-#                 if 'TRIGGERS' == word:
-#                     printMode  = True
-#                 if 'MATURE' == word:
-#                     printMode  = False    
-#                 if printMode==True and word=='FLOWER':
-#                     print(word+', '+candidate)
-                 ###
-                normalizedDistance = (k-lastCorrectIndex)/2
-                if word=='NONDESCRIPT':
-                    print(word+', '+candidate+': '+str(howSignificant(word))+', '+str(normalizedDistance))
-                if (candidate == word) and (k-lastCorrectIndex<2 or 
-                                             (normalizedDistance < howSignificant(word)) or
-                                             (len(guess)>j+1 and len(gold)>k+1 and guess[j+1]==gold[k+1] and howSignificant(word)+howSignificant(guess[j+1])>5) or
-                                             (len(guess)>j+2 and len(gold)>k+2 and guess[j+1]==gold[k+1] and guess[j+2]==gold[k+2])):
-                    if printMode==True and word=='NONDESCRIPT':
-                        print('found: '+candidate+', '+word+'\t'+str(howSignificant(word))+', '+str(normalizedDistance))
-                    if candidate=='XYX' and k-lastCorrectIndex>1:
-                        continue
-                    correct.append(k)
-                    lastCorrectIndex = k
-                    break
+print('start the main loop')
+
+#The main DP loop    
+for i in range(1,len(goldWords)+1):
+    for j in range(1,len(guessWords)+1):
+#         if j%100==0 and i%100==0:
+#             print(str(i)+", "+str(j))
+        if (abs(i-j)>600):
+            continue
+        go = goldWords[i-1]
+        gue = guessWords[j-1]
+#         if i==j and i<110 and i>100:
+#             print(go+' '+gue)
+        if go==gue:
+            substitutionCost = 0
         else:
-            correct.append(-1)
-    #Now print the diff:
-    j = 0
-    lastPrintedGold = -1
-    result += "<p style='margin-bottom: 10px;'>"
-    #For each word in the line in the guessed transcript:
-    numberOfErrors = 0
-    while j<len(guess):
-        #If this word had a match in the gold transcript:
-        if correct[j] != -1:
-            if correct[j]-lastPrintedGold>1:
-                #Print the non-printed gold words first
-                for iter in range(lastPrintedGold+1,correct[j]):
-                    result += "<span style='color: blue'>("+gold[iter]+")</span> " 
-            result += guess[j]+" "
-            lastPrintedGold = correct[j]
-        #If it was a wrong guess and has to be shown in red:
+            substitutionCost = 1
+        toCompare = [dpTable[i-1][j]+1, dpTable[i][j-1]+1, dpTable[i-1][j-1]+substitutionCost]  #deletion, insertion, substitution
+        dpTable[i][j] = min(toCompare)
+        path[i][j] = toCompare.index(min(toCompare))+1
+wer = 100*((0.1+dpTable[len(goldWords)][len(guessWords)])/len(goldWords))
+wer = "%.2f" % wer
+print('WER: '+str(dpTable[len(goldWords)][len(guessWords)])+' of '+str(len(goldWords)))
+print('('+wer+'%)')
+
+###Debugging the DP  table
+# toPrint = ''
+# for i in range(0,len(goldWords),100):
+#     for j in range(0,len(guessWords),100):
+#         toPrint += str(dpTable[i][j])+'\t'
+#     toPrint += '\n'
+#      
+# print(toPrint)
+
+
+#Print colorful
+result = "</body></html>"
+i = len(goldWords)
+j = len(guessWords)
+while j>0 and i>0:
+#     print(str(i)+' '+str(j))
+    if path[i][j]==3:    #substitution
+        if goldWords[i-1]==guessWords[j-1]:
+            result = goldWords[i-1]+' '+result
         else:
-            tempResult = ''
-            while j<len(guess) and correct[j]==-1:
-                tempResult += guess[j]+" "
-                j += 1
-            j -= 1
-            if len(tempResult)>0:
-                numberOfErrors += 1
-            result += "<span style='color: red'>"+tempResult+" </span>"
-        j += 1   
-    result += "</p>\n"
-    errorWordCounter += numberOfErrors;
-    if numberOfErrors>0:
-        print(str(len(guess))+': line had errors:'+str(numberOfErrors))
-    else:
-        print(str(len(guess))+': ok')
-result += "</body></html>"
-    
-    
-shortFile = open(html, 'w')
+            result = "<span style='color: red'>"+guessWords[j-1]+"</span> "+"<span style='color: blue'>("+goldWords[i-1]+")</span> "+result
+        i = i-1
+        j = j-1
+    if path[i][j]==2:    #insertion
+        result = "<span style='color: red'>"+guessWords[j-1]+"</span> "+result
+        j = j-1
+    if path[i][j]==1:    #deletion
+        result = "<span style='color: blue'>("+goldWords[i-1]+")</span> "+result
+        i = i-1
+
+result = '<br>WER: '+str(dpTable[len(goldWords)][len(guessWords)])+' of '+str(len(goldWords)) +' ('+wer+'%)<br>'+ result
+result = "<html><head><title>Transcription evaluation</title></head><body style='margin: 40px;'> "+result
+
+shortFile = open(destAddr, 'w')
 shortFile.write(result)
 shortFile.close()
-
-print(str(xyzcounter)+' XYZ in '+str(errorWordCounter)+" errors")
-
-
-
-    
